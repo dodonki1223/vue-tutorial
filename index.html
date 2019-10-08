@@ -33,7 +33,18 @@
         {{ todo.text }}
       </li>
     </ol>
-    
+  </div>
+
+  <!-- ボタンに処理を紐付けて文字を反転させる -->
+  <div id="app-5">
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage">Reverse Message</button>
+  </div>
+
+  <!-- 入力ボックスにデフォルト値をセットする -->
+  <div id="app-6">
+    <p>{{ message }}</p>
+    <input v-model="message">
   </div>
 
   <script type="text/javascript">
@@ -73,6 +84,27 @@
           { text: 'Learn Vue' },
           { text: 'Learn scomthing awesome' }
         ]
+      }
+    })
+
+    // ボタンに処理を紐付けて文字を反転させる
+    var app5 = new Vue({
+      el: '#app-5',
+      data: {
+        message: 'Hello Vue.js'
+      },
+      methods: {
+        reverseMessage: function () {
+          this.message = this.message.split('').reverse().join('')
+        }
+      }
+    })
+
+    // 入力ボックスにデフォルト値をセットする
+    var app6 = new Vue({
+      el: '#app-6',
+      data: {
+        message: 'Hello Vue!'
       }
     })
   </script>
