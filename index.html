@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <title>Document</title>
+</head>
+<body>
+  <!-- 要素の中身をセットする -->
+  <div id="app">
+    {{ message }}
+  </div>
+
+  <!-- 要素のタイトル属性の書き換え -->
+  <div id="app-2">
+    <span v-bind:title="message">
+      Hover your mouse over me for a few seconds
+      to see my dynamically bound title!
+    </span>
+  </div>
+
+  <!-- 条件分岐を使用し要素を非表示にする（３秒後） -->
+  <div id="app-3">
+    <span v-if="seem">Now you see me</span>
+  </div>
+
+  <!-- Forを使用して要素を複数作成 -->
+  <div id="app-4">
+    <ol>
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ol>
+    
+  </div>
+
+  <script type="text/javascript">
+    // 要素の中身をセットする
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!'
+      }
+    })
+
+    // 要素のタイトル属性の書き換え
+    var app2 = new Vue({
+      el: '#app-2',
+      data: {
+        message: 'You loaded this page on ' + new Date().toLocaleDateString()
+      }
+    })
+
+    // 条件分岐を使用し要素を非表示にする（３秒後）
+    var app3 = new Vue({
+      el: '#app-3',
+      data: {
+        seem: true
+      },
+      created: function() {
+        setInterval( () => { this.seem = false }, 3000 )
+      }
+    })
+
+    // Forを使用して要素を複数作成
+    var app4 = new Vue({
+      el: '#app-4',
+      data: {
+        todos: [
+          { text: 'Learn JavaScript' },
+          { text: 'Learn Vue' },
+          { text: 'Learn scomthing awesome' }
+        ]
+      }
+    })
+  </script>
+</body>
+</html>
