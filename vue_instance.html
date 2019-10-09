@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+    // データオブジェクト
+    var data = { a: 1 }
+
+    // Vue インスタンスにオブジェクトを追加する
+    var vm = new Vue({
+      data: data
+    }) 
+
+    // インスタンスのプロパティを取得すると、
+    // もとのデータからそのプロパティが返されます
+    console.log(vm.a == data.a) // => true
+
+    // プロパティへの代入は、元のデータにも反映されます
+    vm.a = 2
+    console.log(vm.a + ',' + data.a)
+
+    // そして、その逆もまたしかりです
+    data.a = 3
+    console.log(vm.a + ',' + data.a)
+  </script>
+</body>
+</html>

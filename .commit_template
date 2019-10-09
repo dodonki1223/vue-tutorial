@@ -1,0 +1,15 @@
+:recycle: commit message
+
+
+# ======== Emoji Prefix ========
+# 🎉  :tada: 初回commit用. なにか記念すべきcommitならつける
+# ✨  :sparkles: 新しい機能のcommitならつける. あくまでも機能の追加
+# 🔧  :wrench: 設定ファイル系の修正commitにつける.
+# 💄  :lipstick: UIや見た目に関わる修正・更新commitにつける.
+# ✏  :pencil2: タイポの修正commitにつける.
+# 📝  :memo: コメントやテキストドキュメントの更新commitにつける.
+# 🔥  :fire: コードの削除、ファイルの削除commitにつける.
+# 🐛  :bug: バグの修正commitにつける.
+# ♻  :recycle: コードの整形、リファクタcommitにつける.
+# 🚨  :rotating_light: Rubocopなどのlinterの警告対応commitにつける.
+# 🚧  :construction: お試しcommitに対してつける.

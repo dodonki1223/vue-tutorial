@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <p>{{ foo }}</p>
+    <!-- これは `foo` を更新しなくなります！ -->
+    <button v-on:click="foo = 'baz'">Change it</button>
+  </div>
+
+  <script type="text/javascript">
+    var obj = {
+      foo: 'bar'
+    }
+
+    // 既存のプロパティの変更を防ぐ場合は `Object.freeze()` を使用する
+    Object.freeze(obj)
+
+    new Vue({
+      el: '#app',
+      data: obj
+    })
+  </script>
+</body>
+</html>
