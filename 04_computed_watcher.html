@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="example">
+    <p>Original message: "{{ message }}"</p>
+    <p>Computed reversed message: "{{ reversedMessage }}"</p>
+  </div>
+
+  <script type="text/javascript">
+    var vm = new Vue({
+      el: '#example',
+      data: {
+        message: 'Hello'
+      },
+      // 算出プロパティはリアクティブな依存関係にもとづきキャッシュされる
+      // リアクティブな依存関係が更新されたときにだけ再評価される
+      // message が変わらない限りは、reversedMessage に何度アクセスしても、
+      // 関数を再び実行することなく以前計算された結果を即時に返すということです
+      // ref:https://jp.vuejs.org/v2/guide/computed.html#%E7%AE%97%E5%87%BA%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3-vs-%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89
+      computed: {
+        // 算出 getter 関数
+        reversedMessage: function () {
+          // `this` は vm インスタンスを指します
+          return this.message.split('').reverse().join('')
+        }
+      }
+      // Date.now() はリアクティブな依存ではないため、次の算出プロパティは二度と更新されないことを意味します
+      // computed: {
+      //   now: function () {
+      //     return Date.now()
+      // }
+    })
+  </script>
+</body>
+</html>
