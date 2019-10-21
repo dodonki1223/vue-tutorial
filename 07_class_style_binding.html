@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <title>クラスとスタイルのバインディング</title>
+</head>
+<body>
+  <!-- オブジェクト構文（HTMLクラスのバインディング） -->
+  <div id="object_syntax">
+    <div 
+      class="static"
+      v-bind:class="{ 'active': isActive, 'text-danger': hasError }"
+    >static activeのクラスが適用</div>
+    <div 
+      v-bind:class="classObject"
+    >activeのクラスが適用</div>
+    <div 
+      id="object_syntax2"
+      v-bind:class="classObject"
+    >activeのクラスが適用</div>
+  </div>
+
+  <!-- 配列構文（HTMLクラスのバインディング） -->
+  <div id="array_syntax">
+    <div
+      v-bind:class="[activeClass, errorClass]"
+    >active text-dangerのクラスが適用</div>
+    <!-- activeClassはisActiveが真と評価されるときだけ適用される -->
+    <div
+      v-bind:class="[isActive ? activeClass : '', errorClass]"
+    >active text-dangerのクラスが適用</div>
+    <!-- 配列構文の中ではオブジェクト構文の使用ができる -->
+    <div
+      v-bind:class="[{ active: isActive }, errorClass]"
+    >active text-dangerのクラスが適用</div>
+  </div>
+
+  <!-- オブジェクト構文（インラインスタイルのバインディング） -->
+  <div id="object_syntax3">
+      <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">赤文字（フォントサイズ30px）</div>
+      <div v-bind:style="styleObject">赤文字（フォントサイズ13px）</div>
+  </div>
+
+  <!-- 配列構文（インラインスタイルのバインディング） -->
+  <div id="array_syntax2">
+    <div v-bind:style="[baseStyles, overridingStyles]">青文字（フォントサイズ13px）</div>
+  </div>
+
+  <script type="text/javascript">
+    //  オブジェクト構文（HTMLクラスのバインディング）
+    var objectSyntax = new Vue({
+      el: '#object_syntax',
+      data: {
+        isActive: true ,
+        hasError: false ,
+
+        classObject: {
+          active: true,
+          'text-danger': false
+        },
+      }
+    })
+    var objectSyntax2 = new Vue({
+      el: '#object_syntax2',
+      data: {
+        isActive: true ,
+        error: null
+      },
+      computed: {
+        classObject: function() {
+          return {
+            active: this.isActive && !this.error,
+            'text-danger': this.error && this.error.type === 'fatal'
+          }
+        }
+      }
+    })
+
+    // 配列構文（HTMLクラスのバインディング）
+    var arraySyntax = new Vue({
+      el: '#array_syntax',
+      data: {
+        isActive: true,
+        activeClass: 'active',
+        errorClass: 'text-danger'
+      }
+    })
+
+    // オブジェクト構文（インラインスタイルのバインディング）
+    var objectSyntax3 = new Vue({
+      el: '#object_syntax3',
+      data: {
+        activeColor: 'red',
+        fontSize: 30,
+        styleObject: {
+          color: 'red',
+          fontSize: '13px'
+        }
+      }
+    })
+
+    // 配列構文（インラインスタイルのバインディング）
+    var arraySyntax2 = new Vue({
+      el: '#array_syntax2',
+      data: {
+        baseStyles: {
+          color: 'blue',
+          fontSize: '30px'
+
+        },
+        overridingStyles: {
+          fontSize:'13px'
+        }
+      }
+    })
+  </script>
+</body>
+</html>
