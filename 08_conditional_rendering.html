@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <title>条件付きレンダリング</title>
+</head>
+<body>
+  <!-- v-if -->
+  <!-- 遅延描画である -->
+  <!-- 条件がtrueになるまで描画されない -->
+  <div id="awesome">
+    <!-- データで表示 -->
+    <h1 v-if="awesome">Vue is awesome!</h1>
+    <!-- 算出プロパティで表示 -->
+    <h1 v-if="awesomeComputed">Vue is awesome!</h1>
+    <!-- テンプレートでの v-if による条件グループ -->
+    <template v-if="ok">
+      <h1>Title</h1>
+      <p>Paragraph 1</p>
+      <p>Paragraph 2</p>
+    </template>
+  </div>
+  <!-- v-else -->
+  <div id="awesome2">
+    <div v-if="Math.random() > 0.5">
+      Now you see me
+    </div>
+    <div v-else>
+      Now you don't
+    </div>
+  </div>
+  <!-- v-else-if -->
+  <div id="awesome3">
+    <div v-if="type === 'A'">A</div>
+    <div v-else-if="type === 'B'">B</div>
+    <div v-else-if="type === 'C'">C</div>
+    <div v-else>Not A/B/C</div>
+  </div>
+  <!-- Keyによる再利用可能な要素の制御 -->
+  <div id="awesome4">
+    <p>loginTypeの値：{{ loginType }}</p>
+    <div>
+      <p>Keyがないバージョン</p>
+      <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username">
+      </template>
+      <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address">
+      </template>
+    </div>
+    <div>
+      <p>Keyがあるバージョン</p>
+      <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username" key="username-input">
+      </template>
+      <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address" key="email-input">
+      </template>
+    </div>
+    <div>
+      <button v-on:click="toggleLoginType">Toggle login type</button>
+    </div>
+  </div>
+  <!-- v-show -->
+  <!-- 常に描画される displayプロパティを変えているに過ぎない -->
+  <!-- ★v-ifとv-showの使い分けについて★ -->
+  <!-- 頻繁に何かを切り替える必要があれば`v-show`を           -->
+  <!-- 条件が実行時に変更することがほとんどない場合は`v-if`を -->
+  <!-- ref:https://jp.vuejs.org/v2/guide/conditional.html#v-if-vs-v-show -->
+  <div id="awesome5">
+    <h1 v-show="ok">Hello!</h1>
+  </div>
+
+  <script type="text/javascript">
+    // v-if
+    var conditional = new Vue({
+      el: '#awesome',
+      data: {
+        awesome: true,
+        ok: false
+      },
+      computed: {
+        awesomeComputed: function() {
+          return true
+        }
+      }
+    })
+    // v-else
+    var conditional2 = new Vue({
+      el: '#awesome2',
+      data: {
+      },
+      computed: {
+        awesomeComputed: function() {
+        }
+      }
+    })
+    // v-else-if
+    var conditional3 = new Vue({
+      el: '#awesome3',
+      data: {
+        type: 'D'
+      }
+    })
+    // Keyによる再利用可能な要素の制御
+    var conditional4 = new Vue({
+      el: '#awesome4',
+      data: {
+        loginType: 'username'
+      },
+      methods: {
+        toggleLoginType: function() {
+          if (this.loginType === 'username') {
+            this.loginType = 'email'
+          } else {
+            this.loginType = 'username'
+          }
+        }
+      }
+    })
+    // v-show
+    var conditional5 = new Vue({
+      el: '#awesome5',
+      data: {
+        ok: true
+      }
+    })
+  </script>
+</body>
+</html>
