@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <title>リストレンダリング</title>
+</head>
+<body>
+  <!-- v-forで配列に要素をマッピングする -->
+  <ul id="example-1">
+    <li v-for="item in items">
+      {{ item.message }}
+    </li>
+  </ul>
+  <ul id="example-2">
+    <li v-for="(item, index) in items">
+      {{ parentMessage }} - {{ index }} - {{ item.message }}
+    </li>
+  </ul>
+  <!-- オブジェクトのv-for -->
+  <div id="v-for-object">
+    <ul class="demo">
+      <!-- valueのみ -->
+      <li v-for="value in object">
+        {{ value }}
+      </li>
+    </ul>
+    <ul>
+      <!-- keyとvalue -->
+      <li v-for="(value, name) in object">
+        {{ name }}: {{ value }}
+      </li>
+    </ul>
+    <ul>
+      <!-- keyとvalueとindex -->
+      <li v-for="(value, name, index) in object">
+        {{ index }}. {{ name }}: {{ value }}
+      </li>
+    </ul>
+  </div>
+  <!-- 状態の維持 -->
+  <!-- なんかキーの値が表示されないOrz（とりあえずよくわからんから飛ばす） -->
+  <div id="v-for-2">
+    <div v-for="(item, index) in items" v-bind:key="item.id">
+      <p>{{ index }} : {{ item.message }} - {{ item.id }}</p>
+    </div>
+  </div>
+  <!-- 配列の置き換え -->
+  <div id="example-4">
+    <p>ボタンをクリックすることで中身のデータが変わるこ</p>
+    <ul>
+      <li v-for="item in items">
+        {{ item.message }}
+      </li>
+    </ul>
+    <div>
+      <button v-on:click="replaceArray">Replace Array</button>
+    </div>
+  </div>
+  <!-- オブジェクトの変更検出の注意 -->
+  <div id="example-5">
+    <div>名前：{{ userProfile.name }}、年齢：{{ userProfile.age }}、色：{{ userProfile.favoriteColor }}</div>
+  </div>
+  <!-- フィルタ／ソートされた結果の表示 -->
+  <div id="example-6">
+    <!-- 算出プロパティ用 -->
+    <ul>
+      <li v-for="n in evenNumbers">{{ n }}</li>
+    </ul>
+    <!-- メソッド用 -->
+    <ul>
+      <li v-for="n in even(numbers)">{{ n }}</li>
+    </ul>
+  </div>
+  <!-- 範囲付き v-for -->
+  <div id="example-7">
+    <div>
+      <span v-for="n in 10">{{ n }}</span>
+    </div>
+  </div>
+  <!-- <template>でのv-for -->
+  <div id="example-8">
+    <ul>
+      <template v-for="item in items">
+        <li>{{ item.id }}</li>
+        <li>{{ item.message }}</li>
+      </template>
+    </ul>
+  </div>
+  <!-- v-ifとv-for -->
+  <!-- v-ifとv-forを同時に利用することは推奨されていない -->
+  <div id="example-9">
+    <ul>
+      <!-- 同じノードにv-ifとv-forが存在する時、v-forはv-ifよりも高い優先度を持つ -->
+      <li v-for="todo in todos" v-if="!todo.isComplate">
+        {{ todo.todo }}
+      </li>
+    </ul>
+    <ul v-if="todos2.length">
+      <li v-for="todo in todos2">
+        {{ todo.todo }}
+      </li>
+    </ul>
+    <p v-else>No todos left!</p>
+  </div>
+  <script type="text/javascript">
+    // v-forで配列に要素をマッピングする
+    var example1 = new Vue({
+      el: '#example-1',
+      data: {
+        items: [
+          { message: 'Foo' },
+          { message: 'Bar' }
+        ]
+      }
+    })
+    var example2 = new Vue({
+      el: '#example-2',
+      data: {
+        parentMessage: 'Parent',
+        items: [
+          { message: 'Foo' },
+          { message: 'Bar' }
+        ]
+      }
+    })
+    // オブジェクトのv-for
+    new Vue({
+      el: '#v-for-object',
+      data: {
+        object: {
+          title: 'How to do lists in Vue',
+          author: 'Jane Doe',
+          publishedAt: '2016-04-10'
+        }
+      }
+    })
+    // 状態の維持
+    var example3 = new Vue({
+      el: '#v-for-2',
+      data: {
+        items: [
+          { id: 1, message: 'あ' },
+          { id: 2, message: 'い' },
+          { id: 3, message: 'う' },
+          { id: 4, message: 'え' },
+          { id: 5, message: 'お' }
+        ]
+      }
+    })
+    // 配列の置き換え
+    // 値を変更したい時はVue.set、Vue.$setを使用する
+    var example4 = new Vue({
+      el: '#example-4',
+      data: {
+        items: [
+          { message: 'Foo' },
+          { message: 'Bar' }
+        ]
+      },
+      methods: {
+        replaceArray: function() {
+          this.items = this.items.filter(function (item) {
+            return item.message.match(/Foo/)
+          })
+        }
+      }
+    })
+    // オブジェクトの変更検出の注意
+    // 下記のやり方がリアクティブプロパティを追加できる方法です
+    var example5 = new Vue({
+      el: '#example-5',
+      data: {
+        userProfile: {
+          name: '俺だ・俺子'
+        }
+      }
+    })
+    //  グローバルのエイリアスを使用する方法
+    Vue.set(example5.userProfile, 'age', 30)
+    // Object.assignを使用した方法
+    example5.userProfile = Object.assign({}, example5.userProfile, {
+      age: 56,
+      favoriteColor: 'Vue Green'
+    })
+    // フィルタ／ソートされた結果の表示
+    var example6 = new Vue({
+      el: '#example-6',
+      data: {
+        numbers: [1, 2, 3, 4, 5]
+      },
+      computed: {
+        evenNumbers: function () {
+          return this.numbers.filter(function(number) {
+            return number % 2 === 0
+          })
+        }
+      },
+      methods: {
+        even: function(numbers) {
+          return numbers.filter(function (number) {
+            return number % 2 === 0
+          })
+        }
+      }
+    })
+    // 範囲付き v-for 
+    var example7 = new Vue({
+      el: '#example-7'
+    })
+    // <template>でのv-for
+    var example8 = new Vue({
+      el: '#example-8',
+      data: {
+        items: [
+          { id: 1, message: 'うわぁーーー' },
+          { id: 2, message: 'いやああああ' },
+          { id: 3, message: 'どひゃあああ' }
+        ]
+      }
+    })
+    // v-ifとv-for
+    var example9 = new Vue({
+      el: '#example-9',
+      data: {
+        todos: [
+          { todo: '牛乳を買う', isComplate: true },
+          { todo: '水を買う', isComplate: true },
+          { todo: 'うなぎを買う', isComplate: false },
+          { todo: '納豆を買う', isComplate: false },
+        ],
+        todos2: [
+          // { todo: '牛乳を買う', isComplate: true },
+          // { todo: '水を買う', isComplate: true },
+          // { todo: 'うなぎを買う', isComplate: false },
+          // { todo: '納豆を買う', isComplate: false },
+        ]
+      }
+    })
+  </script>
+</body>
+</html>
