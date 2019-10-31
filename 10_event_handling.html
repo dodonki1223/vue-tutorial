@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <title>イベントハンドリング</title>
+</head>
+<body>
+  <!-- イベントの購読 -->
+  <div id="example-1">
+    <button v-on:click="counter += 1">Add 1</button>
+    <p>The button above has been clicked {{ counter }} times.</p>
+  </div>
+  <!-- メソッドイベントハンドラ -->
+  <div id="example-2">
+    <!-- `greet` は、あらかじめ定義したメソッドの名前 -->
+    <button v-on:click="greet">Greet</button>
+  </div>
+  <!-- インラインメソッドハンドラ -->
+  <div id="example-3">
+    <button v-on:click="say('hi')">Say hi</button>
+    <button v-on:click="say('what')">Say What</button>
+    <button v-on:click="warn('Form cannot be submitted yet.', $event)">
+      Submit
+    </button>
+  </div>
+  <!-- イベント修飾子 -->
+  <div id="example-4">
+    <div @click="handler('親')">
+      <div @click="handler('子')">
+        ボタン（親まで実行される）
+      </div>
+    </div>
+    <div @click="handler('親')">
+      <div @click.stop="handler('子')">
+        ボタン（子しか実行されない）
+      </div>
+    </div>
+  </div>
+  <!-- キー修飾子 -->
+  <div id="example-5">
+    <input v-on:keyup.enter="test('Enter')">
+    <!-- KeyboardEvent.keyで公開されている任意のキー名はケバブケースに変換することで -->
+    <!-- 修飾子として直接使用できる                                                  -->
+    <input v-on:keyup.page-down="test('PageDown')">
+  </div>
+  <!-- システム修飾子キー -->
+  <div id="example-6">
+    <!-- Alt + C -->
+    <input @keyup.alt.67="clear">
+    <!-- Shift + Click -->
+    <div @click.shift="doSomething">DoSomething</div>
+  </div>
+  <!-- .exact修飾子 -->
+  <div id="example-7">
+    <!-- これは Shift に加えて Altキーが押されていても発行されます -->
+    <button @click.shift="onShiftClick">A</button>
+    <!-- これは Shift キーが押され、他のキーが押されてないときだけ発行されます -->
+    <button @click.shift.exact ="onShiftClick">B</button>
+    <!-- これは システム修飾子が押されてないときだけ発行されます -->
+    <button @click.exact="onClick">C</button>
+  </div>
+
+  <script type="text/javascript">
+    // イベントの購読
+    var example1 = new Vue({
+      el: '#example-1',
+      data: {
+        counter: 0
+      }
+    })
+    // メソッドイベントハンドラ
+    var example2 = new Vue({
+      el: '#example-2',
+      data: {
+        name: 'Vue.js'
+      },
+      // `methods`オブジェクトの下にメソッドを定義する
+      methods: {
+        greet: function(event) {
+          // メソッド内の`this`は、Vueインスタンスを参照します
+          alert('Hello ' + this.name + '!')
+          // `event`は、ネイティブ DOM イベントです
+          if (event) {
+            alert(event.target.tagName)
+          }
+        }
+      }
+    })
+    // インラインメソッドハンドラ
+    var example3 = new Vue({
+      el: '#example-3',
+      methods: {
+        say: function(message) {
+          alert(message)
+        },
+        warn: function(message, event) {
+          // ネイティブイベントを参照しています
+          if (event) event.preventDefault()
+          alert(message)
+        }
+      }
+    })
+    // イベント修飾子
+    var example4 = new Vue({
+      el: '#example-4',
+      methods: {
+        handler: function(message) {
+          alert(message)
+        }
+      }
+    })
+    // キー修飾子
+    var example5 = new Vue({
+      el: '#example-5',
+      methods: {
+        test: function(message) {
+          alert(message)
+        }
+      }
+    })
+    // システム修飾子キー
+    var example6 = new Vue({
+      el: '#example-6',
+      methods: {
+        clear: function() {
+          alert('Alt + Cが押されました')
+        },
+        doSomething: function() {
+          alert('Do Something')
+        }
+      }
+    })
+    // .exact修飾子
+    var example7 = new Vue({
+      el: '#example-7',
+      methods: {
+        onShiftClick: function(){
+          alert('実行されたよ')
+        },
+        onClick: function() {
+          alert('システム修飾子が押されていない時')
+        }
+      }
+    })
+  </script>
+</body>
+</html>
