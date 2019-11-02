@@ -8,6 +8,25 @@
   <title>コンポーネントの基本</title>
 </head>
 <body>
-  
+  <!-- 基本例 -->
+  <div id="example1">
+    <button-counter></button-counter>
+  </div>
+
+  <script type="text/javascript">
+    // 基本例
+    // ※先にコンポーネントを書かないと動かないようだ
+    Vue.component('button-counter', {
+      data: function() {
+        return {
+          count: 0
+        }
+      },
+      template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+    })
+    var example1 = new Vue({ 
+      el: '#example1'
+    })
+  </script>
 </body>
 </html>
