@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <title>フォーム入力バインディング</title>
+</head>
+<body>
+  <!-- テキスト -->
+  <div id="example1">
+    <div>
+      <input v-model="message" placeholder="edit me">
+      <p>Message is: {{ message }}</p>
+    </div>
+  </div>
+  <!-- 複数行テキスト -->
+  <div id="example2">
+    <div>
+      <span>Multiline message is:</span>
+      <p style="white-space: pre-line;">{{ message }}</p>
+      <br>
+      <textarea v-model="message" placeholder="add multiple lines"></textarea>
+    </div>
+  </div>
+  <!-- チェックボックス -->
+  <div id="example3">
+    <div>
+      <input type="checkbox" id="checkbox" v-model="checked">
+      <label for="checkbox">{{ checked }}</label>
+    </div>
+    <div>
+      <input type="checkbox" id="jack" value="jack" v-model="checkedNames">
+      <label for="jack">Jack</label>
+      <input type="checkbox" id="john" value="john" v-model="checkedNames">
+      <label for="john">John</label>
+      <input type="checkbox" id="mike" value="mike" v-model="checkedNames">
+      <label for="mike">Mike</label>
+      <br>
+      <span>Checked names: {{ checkedNames }}</span>
+    </div>
+  </div>
+  <!-- ラジオ -->
+  <div id="example4">
+    <input type="radio" id="one" value="One" v-model="picked">
+    <label for="one">One</label>
+    <br>
+    <input type="radio" id="two" value="Two" v-model="picked">
+    <label for="two">Two</label>
+    <br>
+    <span>Picked: {{ picked }}</span>
+  </div>
+  <!-- 選択 -->
+  <div id="example5">
+    <div>
+      <select v-model="selected">
+        <option disabled value="">Please select one</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <span>Selected: {{ selected }}</span>
+    </div>
+    <div>
+      <select v-model="selected2" multiple>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <br>
+      <span>Selected: {{ selected2 }}</span>
+    </div>
+    <div>
+      <select v-model="selected3">
+        <option v-for="option in options" v-bind:value="option.value">
+          {{ option.text }}
+        </option>
+      </select>
+      <span>Selected: {{ selected3 }}</span>
+    </div>
+  </div>
+  <!-- 値のバインディング -->
+  <div id="example6">
+    <!-- チェックボックス -->
+    <div>
+      <input
+        type="checkbox"
+        v-model="toggle"
+        true-value="yes"
+        false-value="no"
+        v-on:click="nowCheckBoxValue()"
+      >
+    </div>
+    <!-- ラジオ -->
+    <div>
+      <input
+        type="radio"
+        v-model="pick"
+        v-on:click="nowRadioValue()"
+        v-bind:value="a"
+      >
+    </div>
+    <!-- 選択オプション -->
+    <div>
+      <select v-model="selected" v-on:click="nowSelectValue()">
+        <!-- インラインオブジェクトリテラル -->
+        <option v-bind:value="{ number: 123 }">123</option>
+      </select>
+    </div>
+  </div>
+  <!-- 修飾子 -->
+  <div id="example7">
+    <!-- .lazy -->
+    <div>
+      <input v-model.lazy="msg">
+      <span>msg：{{ msg }}</span>
+    </div>
+    <div>
+      <input v-model="notLazyMsg">
+      <span>notLazyMsg：{{ notLazyMsg }}</span>
+    </div>
+    <!-- .number -->
+    <div>
+      <input v-model.number="age" type="number">
+      <span>type number：{{ typeof age }}</span>
+    </div>
+    <div>
+      <input v-model="ageNotNumber" type="number">
+      <span>type not number：{{ typeof ageNotNumber }}</span>
+    </div>
+    <!-- .trim -->
+    <div>
+      <input v-model.trim="trimMsg">
+      <span>trimMsg：{{ trimMsg }}</span>
+    </div>
+    <div>
+      <input v-model="trimNotMsg">
+      <span>trimNotMsg：{{ trimNotMsg }}</span>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    // テキスト
+    var example1 = new Vue({
+      el: '#example1',
+      data: {
+        message: 'ゴリラ'
+      }
+    })
+    // 複数行テキスト
+    var example2 = new Vue({
+      el: '#example2',
+      data: {
+        message: 'キリン'
+      }
+    })
+    // チェックボックス
+    var example3 = new Vue({
+      el: '#example3',
+      data: {
+        checked: false,
+        checkedNames: []
+      }
+    })
+    // ラジオ
+    var example4 = new Vue({
+      el: '#example4',
+      data: {
+        picked: []
+      }
+    })
+    // 選択
+    var example5 = new Vue({
+      el: '#example5',
+      data: {
+        selected: '',
+        selected2: [],
+        selected3: 'A',
+        options: [
+          { text: 'One', value: 'A' },
+          { text: 'Two', value: 'B' },
+          { text: 'Three', value: 'C' }
+        ]
+      }
+    })
+    // 値のバインディング
+    var example6 = new Vue({
+      el:'#example6',
+      data: {
+        toggle: 'yes',
+        pick: [],
+        a: 'yes',
+        selected: {
+          number: 0
+        }
+      },
+      methods: {
+        nowCheckBoxValue: function() {
+          alert(this.toggle)
+        },
+        nowRadioValue: function() {
+          alert(this.a + ':' + this.pick)
+        },
+        nowSelectValue: function() {
+          console.log(typeof this.selected)
+          console.log(this.selected.number)
+        },
+      }
+    })
+    var example7 = new Vue({
+      el: '#example7',
+      data: {
+        msg: '',
+        notLazyMsg: '',
+        age: 0,
+        ageNotNumber: 0,
+        trimMsg: '',
+        trimNotMsg: ''
+      }
+    })
+  </script>
+</body>
+</html>
