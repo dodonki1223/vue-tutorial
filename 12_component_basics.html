@@ -18,6 +18,19 @@
     <button-counter></button-counter>
     <button-counter></button-counter>
   </div>
+  <!-- プロパティを使用した子コンポーネントへのデータの受け渡し -->
+  <div id="example3">
+    <blog-post title="My journey with Vue"></blog-post>
+    <blog-post title="Blogging with Vue"></blog-post>
+    <blog-post title="Why Vue is so fun"></blog-post>
+  </div>
+  <div id="example4">
+    <blog-post
+      v-for="post in posts"
+      v-bind:key="post.id"
+      v-bind:title="post.title"
+    ></blog-post>
+  </div>
 
   <script type="text/javascript">
     // 基本例
@@ -38,6 +51,24 @@
     // コンポーネントの再利用
     var example2 = new Vue({
       el: '#example2'
+    })
+    // プロパティを使用した子コンポーネントへのデータの受け渡し
+    Vue.component('blog-post', {
+      props: ['title'],
+      template: '<h3>{{ title }}</h3>'
+    })
+    var example3 = new Vue({
+      el: '#example3'
+    })
+    var example4 = new Vue({
+      el: '#example4',
+      data: {
+        posts: [
+          { id: 1, title: 'My journey with vue' },
+          { id: 2, title: 'Blogging with Vue' },
+          { id: 3, title: 'Why Vue is so fun' }
+        ]
+      }
     })
   </script>
 </body>
