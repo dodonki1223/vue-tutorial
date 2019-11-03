@@ -39,6 +39,26 @@
       v-bind:post="post"
     ></blog-post-2>
   </div>
+  <!-- 子コンポーネントのイベントを購読する -->
+  <div id="example6">
+    <div :style="{ fontSize: postFontSize + 'em' }">
+      <blog-post-3
+        v-for="post in posts"
+        v-bind:key="post.id"
+        v-bind:post="post"
+        v-on:enlarge-text="postFontSize += 0.1"
+        v-on:ensmall-text="postFontSize -= 0.1"
+        v-on:enlarge-text2="postFontSize += $event"
+        v-on:ensmall-text2="postFontSize -= $event"
+        v-on:enlarge-text-method="onEnlargeText($event)"
+        v-on:ensmall-text-method="onEnsmallText($event)"
+      ></blog-post-3>
+    </div>
+  </div>
+  <div id="example7">
+    <custom-input v-model="searchText"></custom-input>
+    <span>searchText：{{ searchText }}</span>
+  </div>
   <script type="text/javascript">
     // 基本例
     // ※先にコンポーネントを書かないと動かないようだ
@@ -95,6 +115,69 @@
           { id: 2, title: 'Blogging with Vue', content: 'いやぁあああああああ' },
           { id: 3, title: 'Why Vue is so fun', content: 'ぐわぁああああああああ' }
         ]
+      }
+    })
+    // 子コンポーネントのイベントを購読する
+    Vue.component('blog-post-3', {
+      props: ['post'],
+      template: `
+        <div class="blog-post">
+          <h3>{{ post.title }}</h3>
+          <button v-on:click="$emit('enlarge-text')">
+            Enlarge text
+          </button>
+          <button v-on:click="$emit('ensmall-text')">
+            Ensmall text
+          </button>
+          <button v-on:click="$emit('enlarge-text2', 0.1)">
+            Enlarge text
+          </button>
+          <button v-on:click="$emit('ensmall-text2', 0.1)">
+            Ensmall text
+          </button>
+          <button v-on:click="$emit('enlarge-text-method', 0.2)">
+            Enlarge text
+          </button>
+          <button v-on:click="$emit('ensmall-text-method', 0.2)">
+            Ensmall text
+          </button>
+          <div v-html="post.content"></div>
+        </div>
+      `
+    })
+    var example6 = new Vue({
+      el: '#example6',
+      data: {
+        posts: [
+          { id: 1, title: 'My journey with vue', content: 'うわぁああああああ' },
+          { id: 2, title: 'Blogging with Vue', content: 'いやぁあああああああ' },
+          { id: 3, title: 'Why Vue is so fun', content: 'ぐわぁああああああああ' }
+        ],
+        postFontSize: 1
+      },
+      methods: {
+        onEnlargeText: function(enlargeAmount) {
+          this.postFontSize += enlargeAmount
+        },
+        onEnsmallText: function(ensmallAmount) {
+          this.postFontSize -= ensmallAmount
+        }
+      }
+    })
+    //   コンポーネントで v-model を使う
+    Vue.component('custom-input', {
+      props: ['value'],
+      template: `
+        <input
+          v-bind:value="value"
+          v-on:input="$emit('input', $event.target.value)"
+        >
+      `
+    })
+    var example7 = new Vue({
+      el: '#example7',
+      data: {
+        searchText: ''
       }
     })
   </script>
