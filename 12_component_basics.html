@@ -12,12 +12,14 @@
   <div id="example1">
     <button-counter></button-counter>
   </div>
+
   <!-- コンポーネントの再利用 -->
   <div id="example2">
     <button-counter></button-counter>
     <button-counter></button-counter>
     <button-counter></button-counter>
   </div>
+
   <!-- プロパティを使用した子コンポーネントへのデータの受け渡し -->
   <div id="example3">
     <blog-post title="My journey with Vue"></blog-post>
@@ -31,6 +33,7 @@
       v-bind:title="post.title"
     ></blog-post>
   </div>
+
   <!-- 単一ルート要素 -->
   <div id="example5">
     <blog-post-2
@@ -39,6 +42,7 @@
       v-bind:post="post"
     ></blog-post-2>
   </div>
+
   <!-- 子コンポーネントのイベントを購読する -->
   <div id="example6">
     <div :style="{ fontSize: postFontSize + 'em' }">
@@ -59,6 +63,13 @@
     <custom-input v-model="searchText"></custom-input>
     <span>searchText：{{ searchText }}</span>
   </div>
+
+  <!-- スロットによるコンテンツ配信 -->
+  <div id="example8">
+    <alert-box>
+      Something bad happend.
+    </alert-box>
+  </div>
   <script type="text/javascript">
     // 基本例
     // ※先にコンポーネントを書かないと動かないようだ
@@ -75,10 +86,12 @@
     var example1 = new Vue({ 
       el: '#example1'
     })
+
     // コンポーネントの再利用
     var example2 = new Vue({
       el: '#example2'
     })
+
     // プロパティを使用した子コンポーネントへのデータの受け渡し
     Vue.component('blog-post', {
       props: ['title'],
@@ -97,6 +110,7 @@
         ]
       }
     })
+
     // 単一ルート要素
     Vue.component('blog-post-2', {
       props: ['post'],
@@ -117,6 +131,7 @@
         ]
       }
     })
+
     // 子コンポーネントのイベントを購読する
     Vue.component('blog-post-3', {
       props: ['post'],
@@ -164,6 +179,7 @@
         }
       }
     })
+
     //   コンポーネントで v-model を使う
     Vue.component('custom-input', {
       props: ['value'],
@@ -179,6 +195,19 @@
       data: {
         searchText: ''
       }
+    })
+
+    // スロットによるコンテンツ配信
+    Vue.component('alert-box', {
+      template: `
+        <div class="demo-alert-box">
+          <strong>Error!<strong>
+          <slot></slot>
+        </div>
+      `
+    })
+    var example8 = new Vue({
+      el: '#example8'
     })
   </script>
 </body>
