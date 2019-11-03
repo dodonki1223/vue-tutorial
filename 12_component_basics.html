@@ -12,11 +12,18 @@
   <div id="example1">
     <button-counter></button-counter>
   </div>
+  <!-- コンポーネントの再利用 -->
+  <div id="example2">
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+  </div>
 
   <script type="text/javascript">
     // 基本例
     // ※先にコンポーネントを書かないと動かないようだ
     Vue.component('button-counter', {
+      // dataは関数でなければなりません
       data: function() {
         return {
           count: 0
@@ -24,8 +31,13 @@
       },
       template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
     })
+    // 基本例
     var example1 = new Vue({ 
       el: '#example1'
+    })
+    // コンポーネントの再利用
+    var example2 = new Vue({
+      el: '#example2'
     })
   </script>
 </body>
