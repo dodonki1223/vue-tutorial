@@ -24,6 +24,13 @@
     <!-- これはDOM内なので正しく動作しない -->
     <MyComponent></MyComponent>
   </div>
+
+  <!-- グローバル登録 -->
+  <div id="example2">
+    <component-a></component-a>
+    <component-b></component-b>
+    <component-c></component-c>
+  </div>
   <script type="text/javascript">
     // コンポーネント名
     Vue.component('my-component-name', {
@@ -38,6 +45,26 @@
     })
     var example1 = new Vue({
       el: '#example1'
+    })
+
+    // グローバル登録
+    Vue.component('component-a', {
+      template: `
+        <p>コンポーネントA</p>
+      `
+    })
+    Vue.component('component-b', {
+      template: `
+        <p>コンポーネントB</p>
+      `
+    })
+    Vue.component('component-c', {
+      template: `
+        <p>コンポーネントC</p>
+      `
+    })
+    var example2 = new Vue({
+      el: '#example2'
     })
   </script>
 </body>
