@@ -8,7 +8,37 @@
   <title>コンポーネントの登録</title>
 </head>
 <body>
+  <!-- コンポーネント名 -->
+  <!-- 
+    コンポーネント名を使用する方法は以下の２つである
+      ケバブケース
+        Vue.component('my-component-name', { /* ... */ })
+        カスタム要素を参照する時も同様にケバブケースを使用すること
+      パスカルケース
+        Vue.component('MyComponentName', { /* ... */ }) 
+        カスタム要素を参照する時はケバブケースもパスカルケース両方使用することができます
+        ※ただし文字列でないテンプレートを使用する場合はケバブケースの名前のみ有効
+  -->
+  <div id="example1">
+    <my-component-name></my-component-name>
+    <!-- これはDOM内なので正しく動作しない -->
+    <MyComponent></MyComponent>
+  </div>
   <script type="text/javascript">
+    // コンポーネント名
+    Vue.component('my-component-name', {
+      template: `
+        <p>Kebab-Case</p>
+      `
+    })
+    Vue.component('MyComponent', {
+      template: `
+        <p>PascalCase</p>
+      `
+    })
+    var example1 = new Vue({
+      el: '#example1'
+    })
   </script>
 </body>
 </html>
