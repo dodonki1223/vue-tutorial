@@ -31,6 +31,13 @@
     <component-b></component-b>
     <component-c></component-c>
   </div>
+
+  <!-- ローカル登録 -->
+  <div id="example3">
+    <!-- ComponentA,Bが正しく表示されていること -->
+    <component-dayo></component-dayo>
+  </div>
+
   <script type="text/javascript">
     // コンポーネント名
     Vue.component('my-component-name', {
@@ -65,6 +72,26 @@
     })
     var example2 = new Vue({
       el: '#example2'
+    })
+
+    // ローカル登録
+    var ComponentLocalA = { template: `<p>ComponentLocalA</p>` }
+    var ComponentLocalB = {
+      components: {
+        'component-local-a': ComponentLocalA
+      },
+      template: `
+        <div>
+          <p>ComponentLocalB</p>
+          <component-local-a></component-local-a>
+        </div>
+      `
+    }
+    var example3 = new Vue({
+      el: '#example3',
+      components: {
+        'component-dayo': ComponentLocalB
+      }
     })
   </script>
 </body>
