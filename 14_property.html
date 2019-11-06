@@ -8,8 +8,20 @@
   <title>プロパティ</title>
 </head>
 <body>
-
+  <!-- プロパティの形式（キャメルケース VS ケバブケース） -->
+  <div id="example1">
+    <!-- HTML内ではケバブケース -->
+    <blog-post post-title="hello!"></blog-post>
+  </div>
   <script type="text/javascript">
+    Vue.component('blog-post', {
+      // JavaScript内ではキャメルケース
+      props: ['postTitle'],
+      template: '<h3>{{ postTitle }}</h3>'
+    })
+    var example1 = new Vue({
+      el: '#example1'
+    })
   </script>
 </body>
 </html>
