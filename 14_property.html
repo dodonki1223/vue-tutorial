@@ -13,7 +13,72 @@
     <!-- HTML内ではケバブケース -->
     <blog-post post-title="hello!"></blog-post>
   </div>
+
+  <!-- 静的あるいは動的なプロパティの受け渡し -->
+  <div id="example2">
+    <blog-post-a title="My journey with Vue"></blog-post-a>
+    <!-- 変数の値を動的に割り当てます -->
+    <blog-post-a
+      v-bind:key="post.id" 
+      v-bind:title="post.title" 
+      v-bind:post-title="post.postTitle"
+    ></blog-post-a>
+    <!-- 複数の変数を合成した値を動的に割り当てます -->
+    <blog-post-a
+      v-bind:title="post.title + ' by ' + post.author.name"
+      v-bind:post-title="post.postTitle + ' by ' + post.author.name"
+    ></blog-post-a>
+    <!-- 数値の受け渡し -->
+      <!-- `42`が静的な値であっても、Vueへとそれを伝えるには v-bind が必要です。 -->
+      <!-- これは文字列ではなく、JavaScriptの式となります                        -->
+      <blog-post-a 
+        v-bind:post-title="'固定やで'"
+        v-bind:likes="42"
+      ></blog-post-a>
+      <!-- 変数の値を動的に割り当てています。 -->
+      <blog-post-a v-bind:likes="post.likes"></blog-post-a>
+    <!-- 真偽値の受け渡し -->
+      <!-- 値のないプロパティは、 `true` を意味することとなります -->
+      <blog-post-a is-published v-bind:post-title="'表示やで'"></blog-post-a>
+
+      <!-- `false` が静的な値であっても、 Vueへとそれを伝えるには v-bind が必要です。 -->
+      <!-- これもまた、文字列ではなく JavaScript の式となります。                     -->
+      <blog-post-a v-show:is-published="false" v-bind:post-title="'表示されないで'"></blog-post-a>
+
+      <!-- 変数の値を動的に割り当てています。 -->
+      <blog-post-a v-show:is-published="post.isPublished" v-bind:post-title="'表示されるで'"></blog-post-a>
+
+    <!-- 配列の受け渡し -->
+      <!-- 配列が静的な値であっても、Vueへとそれを伝えるには v-bindが必要です。 -->
+      <!-- これもまた、文字列ではなく JavaScriptの式となります。                -->
+      <blog-post-a v-bind:comment-ids="[234, 266, 273]"></blog-post-a>
+
+      <!-- 変数の値を動的に割り当てています。 -->
+      <blog-post-a v-bind:comment-ids="commentIds"></blog-post-a>
+
+    <!-- オブジェクトの受け渡し -->
+      <!-- 　オブジェクトが静的な値であっても、Vueへとそれを伝えるには v-bindが必要です。 -->
+      <!-- 　これもまた、文字列ではなく JavaScriptの式となります                          -->
+      <blog-post-a
+        v-bind:author="{
+          name: 'Veronica',
+          company: 'Veridian Dynamics'
+        }"
+      ></blog-post-a>
+
+      <!-- 変数の値を動的に割り当てています。 -->
+      <blog-post-a v-bind:author="post.author"></blog-post-a>
+
+    <!-- オブジェクトのプロパティの受け渡し -->
+    <!-- 
+      オブジェクトのすべてのプロパティをコンポーネントのプロパティ（props）として渡したい場合は、 
+      v-bindを引数なしで使うことができます（v-bind:prop-nameの代わりにv-bindを使用）
+    -->
+    <blog-post v-bind="post"></blog-post>
+  </div>
+
   <script type="text/javascript">
+    // プロパティの形式（キャメルケース VS ケバブケース）
     Vue.component('blog-post', {
       // JavaScript内ではキャメルケース
       props: ['postTitle'],
@@ -21,6 +86,34 @@
     })
     var example1 = new Vue({
       el: '#example1'
+    })
+
+    // 静的あるいは動的なプロパティの受け渡し
+    Vue.component('blog-post-a', {
+      props: {
+        postTitle: String,
+        likes: Number,
+        isPublished: Boolean,
+        commentIds: Array,
+        author: Object
+      },
+      template: '<h3>{{ postTitle }} {{ likes }} {{ commentIds }} {{ author }}</h3>'
+    })
+    var example2 = new Vue({
+      el: '#example2',
+      data: {
+        post: { 
+          title: 'titlekamo',
+          postTitle: 'TitleDesuyo',
+          author: {
+            name: 'author_name_dayo',
+            company: 'author_company'
+          },
+          likes: 50,
+          isPublished: true,
+        },
+        commentIds: [100, 200, 300]
+      }
     })
   </script>
 </body>
