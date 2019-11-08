@@ -77,6 +77,17 @@
     <blog-post v-bind="post"></blog-post>
   </div>
 
+  <!-- 単方向のデータフロー -->
+  <div id="example3">
+    <my-component
+      v-bind:initial-counter="testCounter"
+    ></my-component>
+    <button v-on:click="increaseCount()">Counter Up</button>
+    <my-component-dayo 
+      v-bind:size="size"
+    ></my-component-dayo>
+  </div>
+
   <script type="text/javascript">
     // プロパティの形式（キャメルケース VS ケバブケース）
     Vue.component('blog-post', {
@@ -113,6 +124,51 @@
           isPublished: true,
         },
         commentIds: [100, 200, 300]
+      }
+    })
+
+    // 単方向のデータフロー
+    // プロパティを初期値として受け渡し、子コンポーネントにてローカルのデータとして後で
+    // 利用したいと考える場合
+    var myComponent = {
+      props: {
+        initialCounter: Number
+      },
+      data: function() {
+        return {
+          counter: this.initialCounter
+        }
+      },
+      // ローカルの変数として使えると思っていたが使えないOrz
+      // counterで表示されると思っていたのだが……ダメポ
+      template: `<h3>{{ initialCounter }}</h3>`
+    }
+    // プロパティを未加工の値として渡す場合
+    var myComponentDayo = {
+      props: {
+        size: String
+      },
+      computed: {
+        normalizedSize: function() {
+          return this.size.trim().toLowerCase()
+        }
+      },
+      template: `<h3>{{ size }} → {{ normalizedSize }}</h3>`
+    }
+    var example3 = new Vue({
+      el: '#example3',
+      components: {
+        'my-component': myComponent,
+        'my-component-dayo': myComponentDayo
+      },
+      data : {
+        testCounter: 0,
+        size: 'GORIRA'
+      },
+      methods: {
+        increaseCount: function() {
+          this.testCounter += 1
+        }
       }
     })
   </script>
