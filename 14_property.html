@@ -88,6 +88,12 @@
     ></my-component-dayo>
   </div>
 
+  <!-- プロパティのバリデーション -->
+  <!-- 型の検査 -->
+  <div id="example4">
+    <validation-instance-component v-bind:author="new Person('gorira', 'kirin')"></validation-instance-component>
+    <validation-instance-component v-bind:author="'JanJan'"></validation-instance-component>
+  </div>
   <script type="text/javascript">
     // プロパティの形式（キャメルケース VS ケバブケース）
     Vue.component('blog-post', {
@@ -170,6 +176,58 @@
           this.testCounter += 1
         }
       }
+    })
+
+    // プロパティのバリデーション
+    Vue.component('validation-component', {
+      // 開発用のビルドでのみ確認ができる　今回はhtmlで作成していたので確認できなかったOrz
+      props: {
+        // 基本的な型の検査（`null` と `undefined` はすべてのバリデーションにパスします）
+        propA: Number,
+        // 複数の型の許容
+        propB: [String, Number],
+        // 文字列型を必須で要求する
+        propC: {
+          type: String,
+          requiered: true
+        },
+        // デフォルト値つきの数値型
+        propD: {
+          type: Number,
+          default: 100
+        },
+        // デフォルト値つきのオブジェクト型
+        propE: {
+          type: Object,
+          // オブジェクトもしくは配列のデフォルト値は
+          // 必ずそれを生み出すための関数を返す必要があります
+          default: function() {
+            return { message: 'hello' }
+          }
+        },
+        // カスタマイズしたバリデーション関数
+        propF: {
+          validator: function(value) {
+            // プロパティの値は、必ずいずれかの文字列でなければならない
+            return ['success', 'warning', 'danger'].indexOf(value) !== -1
+          }
+        }
+      },
+      template: `<div>{{ propA }}</div>`
+    })
+    // 型の検査
+    function Person(firstName, lastName) {
+      this.firstName = firstName
+      this.lastName = lastName
+    }
+    Vue.component('validation-instance-component', {
+      props: {
+        author: Person
+      },
+      template: `<div>{{ author.firstName }} {{ author.lastName }}</div>`
+    })
+    var example4 = new Vue({
+      el: '#example4'
     })
   </script>
 </body>
