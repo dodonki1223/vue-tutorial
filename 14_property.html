@@ -94,6 +94,19 @@
     <validation-instance-component v-bind:author="new Person('gorira', 'kirin')"></validation-instance-component>
     <validation-instance-component v-bind:author="'JanJan'"></validation-instance-component>
   </div>
+
+  <!-- プロパティでない属性 -->
+  <div id="example5">
+    <!-- 既存の属性への置換とマージ -->
+    <!-- classが"test gorira"になっていること -->
+    <change-component class="gorira"></change-component>
+    <!-- 属性の継承の無効化 -->
+    <base-input
+      v-model="username"
+      required
+      placeholder="Enter your username"
+    ></base-input>
+  </div>
   <script type="text/javascript">
     // プロパティの形式（キャメルケース VS ケバブケース）
     Vue.component('blog-post', {
@@ -228,6 +241,38 @@
     })
     var example4 = new Vue({
       el: '#example4'
+    })
+
+    // プロパティでない属性
+    // 既存の属性への置換とマージ
+    Vue.component('change-component', {
+      template: `<div class="test">置換される<div>`
+    })
+    // 属性の継承の無効化
+    Vue.component('base-input', {
+      inheritAttrs: false,
+      props: {
+        label: String,
+        value: String,
+      },
+      template: `
+        <label>
+          {{ label }}
+          <input
+            v-bind="$attrs"
+            v-bind:value="value"
+            v-on:input="$emit('input', $event.target.value)"
+        </label>
+      `
+    })
+    var example5 = new Vue({
+      el: '#example5',
+      data : {
+        username: {
+          label: "gorira",
+          value: "kirin"
+        }
+      }
     })
   </script>
 </body>
