@@ -7,22 +7,26 @@
       v-model="lovingVue"
       v-on:change="nowChecked"
     ></MyComponent>
+    <BaseInput
+      v-model="label"
+    ></BaseInput>
   </div>
 </template>
 
 <script>
 import MyComponent from './components/MyComponent.vue'
+import BaseInput from './components/BaseInput.vue'
 
 export default {
   name: 'app',
   components: {
-    MyComponent
+    MyComponent,
+    BaseInput
   },
   data: function() {
     return {
-      lovingVue: {
-        checked: true
-      }
+      lovingVue: true,
+      label: 'ゴリラ',
     }
   },
   methods: {
@@ -31,7 +35,7 @@ export default {
     },
     nowChecked: function(checked) {
       alert(checked)
-    }
+    },
   }
 }
 </script>
