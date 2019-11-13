@@ -34,16 +34,25 @@
         </navigation-link>
       </div>
     </div>
+    <div>
+      <!-- フォールバックコンテンツ -->
+      <!-- コンテンツの指定なし -->
+      <submit-button></submit-button>
+      <!-- コンテンツの指定 -->
+      <submit-button>Save</submit-button>
+    </div>
   </div>
 </template>
 
 <script>
 import NavigationLink from './components/NavigationLink.vue'
+import SubmitButton from './components/Button.vue'
 
 export default {
   name: 'app',
   components: {
-    NavigationLink
+    NavigationLink,
+    SubmitButton
   },
   data: function() {
     return {
