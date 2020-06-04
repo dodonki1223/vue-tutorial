@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <title>Vue.js2 The Complete Guide</title>
+</head>
+<body>
+  <div id="app">
+    <!--  
+      v-bind は値との関連付け
+      v-on はイベントの関連付けです
+    -->
+    <button v-on:click="increase">Click me</button>
+    <p>{{ counter }}</p>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
