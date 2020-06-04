@@ -11,8 +11,11 @@
     <!--  
       v-bind は値との関連付け
       v-on はイベントの関連付けです
+        独自の引数を渡すことができる
+        Vue.jsでは$eventを自動的にフェッチし一種の変数に格納する（$eventという名前でアクセスできる）
+        $event の上書きはしてはいけない
     -->
-    <button v-on:click="increase">Click me</button>
+    <button v-on:click="increase(2, $event)">Click me</button>
     <p>{{ counter }}</p>
     <p v-on:mousemove="updateCoordinates">Coordinates: {{ x }} / {{ y }}</p>
   </div>
