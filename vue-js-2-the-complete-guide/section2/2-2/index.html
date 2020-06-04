@@ -31,6 +31,11 @@
       Coordinates: {{ x }} / {{ y }}
       - <span v-on:mousemove.stop=>DEAD SPOT</span>
     </p>
+    <!-- 
+      v-on:keyup.enter.space としチェーンすることもできる
+      enterキーを押した時、alertMeを押した時に alertMe メソッドが実行されるようになる
+     -->
+    <input type="text" v-on:keyup.enter="alertMe">
   </div>
   <script src="./app.js"></script>
 </body>
