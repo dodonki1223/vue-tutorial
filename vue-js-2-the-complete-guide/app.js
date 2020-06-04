@@ -8,6 +8,7 @@ new Vue({
   },
   methods: {
     sayHello: function() {
+      this.title = 'Hello!'
       // dataオブジェクトはthisに含まれているがテンプレートに関してはthisは必要ない(重要らしいので覚えること)
       return this.title
     }
