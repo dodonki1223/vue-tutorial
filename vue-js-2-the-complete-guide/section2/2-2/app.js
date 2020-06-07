@@ -13,6 +13,20 @@ new Vue({
       return this.counter > 5 ? 'Greater 5' : 'Smaller than 5'
     }
   },
+  // 非同期タスクを実行する時に使用する
+  // computed は常に同期して実行する必要がある
+  // 使い分けとしては非同期なのか同期なのかで判断するとよさそう
+  //   APIに実行するとかで使用したほうが良さそう……
+  watch: {
+    // 名前はDataオブジェクトのプロパティ名と一致する必要がある
+    // counterの値が変化するたびに実行するコードを記述します
+    counter: function(value) {
+      var vm = this
+      setTimeout(function() {
+        vm.counter = 0
+      }, 2000)
+    }
+  },
   methods: {
     // ES6の書き方なのでこちらを採用すると良さそう！！
     result() {
