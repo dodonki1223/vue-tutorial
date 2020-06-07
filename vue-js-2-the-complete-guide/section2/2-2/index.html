@@ -43,6 +43,22 @@
       enterキーを押した時、alertMeを押した時に alertMe メソッドが実行されるようになる
      -->
     <input type="text" v-on:keyup.enter="alertMe">
+
+    <div>
+      <!-- 
+        result() はどの値が変更されても実行される
+          実際に関係している値は `counter` だけだが `secondCounter` の値が変更された時も実行されてしまう
+        output は関係のある値が変更された時に実行される
+          `counter` の値が実行された時だけ実行される
+        console.logで動きを確認できるので確認するとよい
+       -->
+      <p>２つ目の方法</p>
+      <button v-on:click="counter++">Increase</button>
+      <button v-on:click="counter--">Decrease</button>
+      <button v-on:click="secondCounter++">Increase Second</button>
+      <p>Counter: {{ counter }} | SecondCounter: {{ secondCounter }}</p>
+      <p>Result: {{ result() }} | {{ output }}</p>
+    </div>
   </div>
   <script src="./app.js"></script>
 </body>
