@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <title>Vue.js2 The Complete Guide</title>
+</head>
+<body>
+  <div id="app">
+    <!--  
+      v-on は @ にして書きかえることができる
+      v-on:click="changeLink" → @click="changeLink"
+
+      v-bind は : にして書き換えることができる
+      v-bind:href="link" → :href="link"
+    -->
+    <button @click="changeLink">Click to Change Link</button>
+    <a :href="link">Link</a>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
