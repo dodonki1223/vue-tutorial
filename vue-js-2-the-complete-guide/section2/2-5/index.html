@@ -11,17 +11,22 @@
 <body>
   <div id="app">
     <!--  
-      中括弧の中にはJavaScriptのObjectを追加する必要がある
-      :class="{red: attachRed}"
+      <CSSクラスを条件付きでアタッチ、デタッチする方法>
+        中括弧の中にはJavaScriptのObjectを追加する必要がある
+        :class="{red: attachRed}"
 
-      toggleの操作を行うようにすることができる
-      @click="attachRed = !attachRed"
+        toggleの操作を行うようにすることができる
+        @click="attachRed = !attachRed"
+
+        :class="{red: this.attachRed, blue: !this.attachRed}" のように中が多くなってきたら
+        :class="divClasses"のようにcomputedに移動するのも手です
+        divClasses では Object を返すようになっている
     -->
     <div 
       class="demo"
       @click="attachRed = !attachRed"
-      :class="{red: attachRed}"></div>
-    <div class="demo"></div>
+      :class="divClasses"></div>
+    <div class="demo" :class="{red: attachRed}"></div>
     <div class="demo"></div>
   </div>
   <script src="./app.js"></script>
