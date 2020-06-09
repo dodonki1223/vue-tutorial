@@ -27,7 +27,15 @@
       @click="attachRed = !attachRed"
       :class="divClasses"></div>
     <div class="demo" :class="{red: attachRed}"></div>
-    <div class="demo"></div>
+    <!--  
+      直接dataオブジェクトの値（color）を設定している
+      colorが存在するcssだったらそのcssが適用されるようになる
+      名前でcssのクラス名を設定できる
+      [○,△,☓]などように複数のオブジェクトを設定することができる
+    -->
+    <div class="demo" :class="[color, {red: attachRed}]"></div>
+    <hr>
+    <input type="text" v-model="color">
   </div>
   <script src="./app.js"></script>
 </body>
