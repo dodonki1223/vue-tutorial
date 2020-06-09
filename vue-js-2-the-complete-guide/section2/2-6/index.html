@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./app.css">
+
+  <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+  <title>Vue.js2 The Complete Guide</title>
+</head>
+<body>
+  <div id="app">
+    <!--  
+      - がある場合はシングルクォーテーションで囲む必要がある
+        :style="{'background-color'}
+      backgroundColor に記述した際は `background-color` になる
+      - を排除したキャメルケースで記述することもできます
+    -->
+    <div class="demo" :style="{backgroundColor: color}"></div>
+    <!-- 
+      このmyStyleに関してはプログレスバーの実装に使えたりする
+     -->
+    <div class="demo" :style="myStyle"></div>
+    <div class="demo"></div>
+    <hr>
+    <input type="text" v-model="color">
+    <input type="text" v-model="width">
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
