@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./app.css">
+
+  <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+  <title>Vue.js2 The Complete Guide</title>
+</head>
+<body>
+  <div id="app">
+    <!--  
+      中括弧の中にはJavaScriptのObjectを追加する必要がある
+      :class="{red: attachRed}"
+
+      toggleの操作を行うようにすることができる
+      @click="attachRed = !attachRed"
+    -->
+    <div 
+      class="demo"
+      @click="attachRed = !attachRed"
+      :class="{red: attachRed}"></div>
+    <div class="demo"></div>
+    <div class="demo"></div>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
