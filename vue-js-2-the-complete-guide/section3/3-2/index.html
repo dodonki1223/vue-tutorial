@@ -11,7 +11,17 @@
     <!--  
       (ingredient, i) ってすることで i には index が付与されています
     -->
-    <li v-for="(ingredient, i) in ingredients">{{ ingredient }} ({{ i }})</li>
+    <ul>
+      <li v-for="(ingredient, i) in ingredients">{{ ingredient }} ({{ i }})</li>
+    </ul>
+    <!-- 
+      template を使用して v-for をすることで１つ以上の要素を繰り返しで描画することができる
+      v-if の時と同じです。階層構造のないものに関しては templeteを使用するのが良さそう
+     -->
+    <template v-for="(ingredient, index) in ingredients">
+      <h1>{{ ingredient }}</h1>
+      <p>{{ index }}</p>
+    </template>
   </div>
   <script src="./app.js"></script>
 </body>
