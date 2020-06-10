@@ -16,6 +16,18 @@
      -->
     <p v-if="show">You can see me! <span>Hello!</span></p>
     <p v-else>Now you see me!</p>
+    
+    <!-- 
+      template は Html5 の機能です
+      template を使う利点としては複数の要素をまとめて v-if をすることができる
+      普通の要素だと１つしか出来ないが template は複数できるため良い
+      ※template は html の要素として表示されないようになっている
+     -->
+    <template v-if="show">
+      <h1>Heading</h1>
+      <p>Inside a template</p>
+    </template>
+
     <p>Do you also see me?</p>
     <button @click="show = !show">Switch</button>
   </div>
