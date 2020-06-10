@@ -28,7 +28,14 @@
       <p>Inside a template</p>
     </template>
 
-    <p>Do you also see me?</p>
+    <!-- 
+      要素の表示・非表示の方法には v-if の他に v-show があります
+      それぞれの違いは以下の通り
+        v-if  :要素自体がなくなる
+        v-show:「display:none」が要素のスタイルに付与される
+      要素を残しておきたい以外の時は v-if を使えば良さそう
+     -->
+    <p v-show="show">Do you also see me?</p>
     <button @click="show = !show">Switch</button>
   </div>
   <script src="./app.js"></script>
