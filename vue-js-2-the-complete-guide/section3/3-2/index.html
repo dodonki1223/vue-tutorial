@@ -7,6 +7,13 @@
   <title>Vue.js2 The Complete Guide - Section3 Using Conditionals and Rendering Lists</title>
 </head>
 <body>
+  <!-- 
+    本来ならv-forを使用している時はkey属性を必ず与えること
+      Vue が各ノードの識別情報を追跡できるヒントを与えるために、
+      また、既存の要素の再利用と並び替えができるように、
+      一意な key 属性を全てのアイテムに与える必要があります
+    と公式サイトに記載されています
+  -->
   <div id="app">
     <!--  
       (ingredient, i) ってすることで i には index が付与されています
