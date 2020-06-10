@@ -14,6 +14,20 @@
     <ul>
       <li v-for="(ingredient, i) in ingredients">{{ ingredient }} ({{ i }})</li>
     </ul>
+
+    <hr>
+    <ul>
+      <!-- 
+        v-for の中にさらに v-for を使用することもできる
+        ()を使用することで通常の値にプラスしてさらに情報を取得することができる
+          key, value , index がその例です
+      -->
+      <li v-for="person in persons">
+        <div v-for="(value, key, index) in person">{{ key }}: {{ value }} ({{ index }})</div>
+      </li>
+    </ul>
+    <hr>
+
     <!-- 
       template を使用して v-for をすることで１つ以上の要素を繰り返しで描画することができる
       v-if の時と同じです。階層構造のないものに関しては templeteを使用するのが良さそう
