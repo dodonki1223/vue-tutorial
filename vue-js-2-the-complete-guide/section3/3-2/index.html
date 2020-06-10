@@ -26,6 +26,11 @@
         <div v-for="(value, key, index) in person">{{ key }}: {{ value }} ({{ index }})</div>
       </li>
     </ul>
+    <!-- 
+      数値を繰り返したい時は「n in 10」などのように記述すること
+      10回繰り返すような形になります
+    -->
+    <span v-for="n in 10">{{ n }}</span>
     <hr>
 
     <!-- 
