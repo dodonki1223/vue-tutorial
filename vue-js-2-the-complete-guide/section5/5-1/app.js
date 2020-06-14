@@ -1,9 +1,25 @@
-var vm1 = new Vue({
-  el: '#app1',
-  data: {
+/*
+  $elについて
+    div#app1を参照している
+    監視対象のHTMLの情報を保持している
+  $dataについて
+    データプロパティを保持するオブジェクト
+    下記のようにVueのインスタンスの外側で設定することができる
+    データの初期化の１つの方法
+
+  Vue.jsは固有結界だけを作るのではなく、普通のJavaScriptとなんらかわらない
+  通常のJavaScriptと使えるってことが重要なこと！！！！
+  最小構成で設定することができることが重要です！！！！
+  通常のJavaScriptと共存させられる
+ */
+var data = {
     title: 'The VueJS Instance',
     showParagraph: false
-  },
+}
+
+var vm1 = new Vue({
+  el: '#app1',
+  data: data,
   methods: {
     show: function() {
       this.showParagraph = true;
@@ -36,7 +52,7 @@ setTimeout(function() {
   なので使うことができない
  */
 vm1.newProp = 'New!'
-console.log(vm1)
+console.log(vm1.$data === data)
 
 // １つの画面に複数のVueインスタンスを作成することは可能
 var vm2 = new Vue({
