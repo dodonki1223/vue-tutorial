@@ -25,10 +25,18 @@ var vm1 = new Vue({
   }
 })
 
-// 外部からVueのインスタンスにアクセスする方法
+// 外部からVueのインスタンスにアクセスする方法 
 setTimeout(function() {
   vm1.title = 'Changed by Timer'
 }, 3000)
+
+/*
+  プロパティを追加することはできるがこれは通常のJavaScriptの動作
+  こんな形で追加されたプロパティはVue.jsが管理していないプロパティ
+  なので使うことができない
+ */
+vm1.newProp = 'New!'
+console.log(vm1)
 
 // １つの画面に複数のVueインスタンスを作成することは可能
 var vm2 = new Vue({
