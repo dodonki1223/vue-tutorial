@@ -24,6 +24,12 @@ var vm1 = new Vue({
     show: function() {
       this.showParagraph = true;
       this.updateTitle('The VueJS Instance (Updated)');
+      /*
+        Vue.jsが管理しているhtml要素に簡単にアクセスする方法が $refs プロパティです
+        Vueが管理している html 要素に ref="xxxx" を設定してあげるだけでアクセスできるようになる
+        QuerySelectorを使用しないでクソ簡単にhtml要素にアクセスできるようになる
+       */
+      this.$refs.myButton.innerText = 'Test'
     },
     updateTitle: function(title) {
       this.title = title;
@@ -44,7 +50,10 @@ var vm1 = new Vue({
 // 外部からVueのインスタンスにアクセスする方法 
 setTimeout(function() {
   vm1.title = 'Changed by Timer'
+  vm1.show()
 }, 3000)
+
+vm1.$refs.heading.innerText = 'Something else'
 
 /*
   プロパティを追加することはできるがこれは通常のJavaScriptの動作
