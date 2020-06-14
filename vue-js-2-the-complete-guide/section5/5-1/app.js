@@ -1,4 +1,4 @@
-new Vue({
+var vm1 = new Vue({
   el: '#app1',
   data: {
     title: 'The VueJS Instance',
@@ -23,12 +23,23 @@ new Vue({
       alert('Title changed, new value: ' + value);
     }
   }
-});
+})
+
+// 外部からVueのインスタンスにアクセスする方法
+setTimeout(function() {
+  vm1.title = 'Changed by Timer'
+}, 3000)
 
 // １つの画面に複数のVueインスタンスを作成することは可能
-new Vue({
+var vm2 = new Vue({
   el: '#app2',
   data: {
     title: 'The second Instance'
+  },
+  methods: {
+    // 外部からVueのインスタンスにアクセスする方法
+    onChange: function() {
+      vm1.title = 'Changed!'
+    }
   }
 })
