@@ -1,6 +1,15 @@
 var data = { status: 'Critical' }
 
-Vue.component('my-cmp', {
+
+/*
+    コンポーネントには以下の２種類がある
+      グローバルコンポーネント
+        Vue.component('my-cmp', {})
+      ローカルコンポーネント
+        var cmp = {}
+ */
+
+var cmp = {
   /*
       new Vueの時は下記のような記述だったのにComponentでは関数なのか？
       ------------------------------------------- 
@@ -31,8 +40,15 @@ Vue.component('my-cmp', {
       this.status = 'Normal'
     }
   }
-})
+}
 
 new Vue({
   el: '#app',
+  components: {
+    'my-cmp': cmp
+  }
+})
+
+new Vue({
+  el: '#app2',
 })
