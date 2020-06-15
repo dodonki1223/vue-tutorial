@@ -1,30 +1,17 @@
 <template>
-  <!-- 
-    template 直下は必ずたった１つの要素だけにすること 
-    そうしないとトランスパイル出来なくて落ちる
-    -->
   <div>
-    <p>Server Status: {{ status }}</p>
-    <hr>
-    <button @click="changeStatus">Change Status</button>
+    <app-server-status v-for="server in 5"></app-server-status>
   </div>
 </template>
 
 <script>
+// ES6の記法を使用しコンポーネントのファイルを読み込みます
+import ServerStatus from  './ServerStatus.vue'
+
 export default {
-  data: function() {
-    return {
-      status: 'Critical'
-    }
-  },
-  methods: {
-    /*
-      changeStatus: function()の書き方でなくて下記のような書き方でもOK
-      ES6からはObjectに関数を記述することができるようになったため、以下の書き方でOK
-     */
-    changeStatus() {
-      this.status = 'Normal'
-    }
+  // import 後にはどのコンポーネントを使用するのかの情報を書き込みます
+  components: {
+    'app-server-status': ServerStatus
   }
 }
 </script>
