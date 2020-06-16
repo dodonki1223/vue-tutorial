@@ -12,10 +12,14 @@
 </template>
 
 <script>
-import Servers from './Servers.vue'
-import ServerDetails from './ServerDetails.vue'
-import AppHeader from './Header.vue'
-import AppFooter from './Footer.vue'
+/* 
+    より大きなプロジェクトに対応できるようにフォルダ分けをちゃんとすること
+    機能単位で分けると良さそう
+ */
+import Servers from './components/Server/Servers.vue'
+import ServerDetails from './components/Server/ServerDetails.vue'
+import AppHeader from './components/Shared/Header.vue'
+import AppFooter from './components/Shared/Footer.vue'
 
 export default {
   components: {
