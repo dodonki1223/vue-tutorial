@@ -22,9 +22,15 @@ import AppHeader from './components/Shared/Header.vue'
 import AppFooter from './components/Shared/Footer.vue'
 
 export default {
+  /*
+      Servers のみの指定でも動作します
+        これは内部で Servers: Servers という形に変換されるらしい（Vue.jsの機能ではなくES6の機能）
+      serverDetails: ServerDetails でも動作します
+        Vue.js が内部で <server-details></server-details> に変換されて把握できるようになる
+   */
   components: {
-    'servers': Servers,
-    'server-details': ServerDetails,
+    Servers,
+    serverDetails: ServerDetails,
     'app-header': AppHeader,
     'app-footer': AppFooter,
   }
