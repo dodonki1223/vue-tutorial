@@ -3,10 +3,9 @@
     <h3>You may view the User Details here</h3>
     <p>Many Details</p>
     <!-- 
-        myName などにしても動作します……が単一のテンプレートのみ大丈夫です
-        これは dom 仕様で正しく動作しなくなるのでキャメルケースは控えたほうがよいでしょう
+        通常のプロパティのように使用できる
      -->
-    <p>User Name: {{ myName }}</p>
+    <p>User Name: {{ switchName() }}</p>
   </div>
 </template>
 
@@ -18,7 +17,12 @@ export default {
       必要があります
       Vue.jsが暗黙的に data オブジェクトと紐付けてくれる
    */
-  props: ['myName']
+  props: ['myName'],
+  methods: {
+    switchName() {
+      return this.myName.split("").reverse().join("")
+    }
+  }
 }
 </script>
 
