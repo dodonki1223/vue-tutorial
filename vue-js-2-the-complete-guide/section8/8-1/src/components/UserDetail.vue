@@ -3,9 +3,10 @@
     <h3>You may view the User Details here</h3>
     <p>Many Details</p>
     <!-- 
-        通常のプロパティのように使用できる
+        通常のプロパティのように使用できる  
      -->
     <p>User Name: {{ switchName() }}</p>
+    <p>User Age: {{ userAge }}</p>
     <button @click="resetName">Reset Name</button>
     <button @click="resetFn()">Reset Name</button>
   </div>
@@ -29,7 +30,8 @@ export default {
     myName: {
       type: String
     },
-    resetFn: Function
+    resetFn: Function,
+    userAge: Number
   },
   methods: {
     switchName() {
