@@ -15,9 +15,19 @@ export default {
       外部から受け取るためのプロパティになる
       重要なのは <p>User Name: {{ myName }}</p> で使用している myName と一致している
       必要があります
-      Vue.jsが暗黙的に data オブジェクトと紐付けてくれる
+      Vue.jsが暗黙的に dat a オブジェクトと紐付けてくれる
    */
-  props: ['myName'],
+  props: {
+    /*
+        props のデータの型を指定することができます今回の場合は文字列で設定しているますが
+        数値を渡すと以下のようなエラーが console に表示されます
+          vue.esm.js?efeb:628 [Vue warn]: Invalid prop: type check failed for prop "myName". Expected String with value "1", got Number with value 1.
+        type 以外にも required、default なども使用が可能です
+     */
+    myName: {
+      type: String
+    }
+  },
   methods: {
     switchName() {
       return this.myName.split("").reverse().join("")
