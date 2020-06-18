@@ -6,6 +6,7 @@
         通常のプロパティのように使用できる
      -->
     <p>User Name: {{ switchName() }}</p>
+    <button @click="resetName">Reset Name</button>
   </div>
 </template>
 
@@ -30,7 +31,21 @@ export default {
   },
   methods: {
     switchName() {
-      return this.myName.split("").reverse().join("")
+      return this.myName.split("").reverse().join("")  
+    },
+    resetName() {
+      /*
+          プロパティが文字列、数値、bool値などのプリミティブではなく
+          オブジェクトまたは配列の場合は参照型です
+            参照型はメモリに１つだけ存在する
+          オブジェクトや配列などを変数に格納するとそれはメモリ内の場所へのポインタのみを格納する
+          親から子コンポーネントにオブジェクトまたは配列を渡す場合は実際にはメモリ内のその場所へのポインタを渡している
+          子コンポーネントで変更するとメモリ内のオブジェクトが変更される
+            this.myName = 'Max' こういう感じで記述すると ポインタ値 が 文字列 で変更されてしまう
+            本来ならポインタ値の中の値を変更する必要があるので上の書き方だと正しく動作しない（親コンポーネントのボタンで名前の変更ができなくなる）
+       */
+      this.myName = 'Max'
+      this.$emit('nameWasReset', this.myName)
     }
   }
 }
