@@ -7,6 +7,7 @@
      -->
     <p>User Name: {{ switchName() }}</p>
     <button @click="resetName">Reset Name</button>
+    <button @click="resetFn()">Reset Name</button>
   </div>
 </template>
 
@@ -27,7 +28,8 @@ export default {
      */
     myName: {
       type: String
-    }
+    },
+    resetFn: Function
   },
   methods: {
     switchName() {
