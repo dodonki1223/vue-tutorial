@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import { eventBus } from '../main'
+
 export default {
   /*
       外部から受け取るためのプロパティになる
@@ -51,6 +53,16 @@ export default {
       this.myName = 'Max'
       this.$emit('nameWasReset', this.myName)
     }
+  },
+  created() {
+    /*
+        eventBus で ageWasEdited イベントの時に age をセットするようにする
+        データは eventBus で管理する仕組み グローバルな扱いになりそう
+        $on で ageWasEdited イベントを監視している
+     */
+    eventBus.$on('ageWasEdited', (age) => {
+      this.userAge = age
+    })
   }
 }
 </script>

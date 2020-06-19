@@ -8,12 +8,17 @@
 </template>
 
 <script>
+import { eventBus } from '../main'
+
 export default {
   props: ['userAge'],
   methods: {
     editAge() {
       this.userAge = 30
-      this.$emit('ageWasEdited', this.userAge)
+      // this.$emit('ageWasEdited', this.userAge)
+
+      // 兄弟間コンポーネント同士でデータの連携をするため eventBus 経由で行う
+      eventBus.$emit('ageWasEdited', this.userAge)
     }
   }
 }
