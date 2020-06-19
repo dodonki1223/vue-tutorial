@@ -12,7 +12,13 @@ import App from './App.vue'
           render: h => h(App)
         })
  */
-export const eventBus = new Vue()
+export const eventBus = new Vue({
+  methods: {
+    changeAge(age) {
+      this.$emit('ageWasEdited', age)
+    }
+  }
+})
 
 new Vue({
   el: '#app',

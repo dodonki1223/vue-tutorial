@@ -18,7 +18,10 @@ export default {
       // this.$emit('ageWasEdited', this.userAge)
 
       // 兄弟間コンポーネント同士でデータの連携をするため eventBus 経由で行う
-      eventBus.$emit('ageWasEdited', this.userAge)
+      // <emit経由 - Version>
+      // eventBus.$emit('ageWasEdited', this.userAge)
+      // <eventBusのメソッド経由 - Version>
+      eventBus.changeAge(this.userAge)
     }
   }
 }
