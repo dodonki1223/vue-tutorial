@@ -20,6 +20,14 @@ export default {
   },
   destroyed() {
     console.log('Destroyed!')
+  },
+  // 別のコンポーネントの時に移動した時に実行される
+  deactivated() {
+    console.log('Deactivated!')
+  },
+  // コンポーネントが実行されている時に実行される
+  activated() {
+    console.log('Activated!')
   }
 }
 </script>
