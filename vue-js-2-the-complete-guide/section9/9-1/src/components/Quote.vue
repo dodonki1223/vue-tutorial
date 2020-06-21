@@ -1,6 +1,15 @@
 <template>
   <div>
-    <p>A wonderful Quote!</p>
+    <!--  
+      外部から渡されるコンテンツをレンダリングすることができる方法
+      下記のような形でこの components を使用すると <app-quote> で囲んだ中身が
+      <slot> の部分にレンダリングされるようになる
+        <app-quote>
+          <h2>The Quote</h2>
+          <p>A wonderful Quote</p>
+        </app-quote>
+     -->
+    <slot></slot>
   </div>
 </template>
 
