@@ -1,15 +1,21 @@
 <template>
   <div>
-    <!--  
-      外部から渡されるコンテンツをレンダリングすることができる方法
-      下記のような形でこの components を使用すると <app-quote> で囲んだ中身が
-      <slot> の部分にレンダリングされるようになる
-        <app-quote>
-          <h2>The Quote</h2>
-          <p>A wonderful Quote</p>
-        </app-quote>
-     -->
-    <slot></slot>
+    <div class="title">
+      <!--  
+        外部から渡されるコンテンツをレンダリングすることができる方法
+        下記のような形でこの components を使用すると <app-quote> で囲んだ中身が
+        <slot> の部分にレンダリングされるようになる
+          <app-quote>
+            <h2>The Quote</h2>
+            <p>A wonderful Quote</p>
+          </app-quote>
+      -->
+      <slot name="title"></slot>
+    </div>
+    <hr>
+    <div>
+      <slot name="content"></slot>
+    </div>
   </div>
 </template>
 
@@ -27,5 +33,8 @@
   }
   h2 {
     color: red;
+  }
+  .title {
+    font-style: italic;
   }
 </style>

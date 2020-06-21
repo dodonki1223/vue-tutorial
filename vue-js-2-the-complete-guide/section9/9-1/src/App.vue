@@ -7,8 +7,13 @@
           ただし、style に関しては子コンポーネント側のものしか正しく動作しない
          -->
         <app-quote>
-          <h2>{{ quoteTitle }}</h2>
-          <p>A wonderful Quote</p>
+          <!-- 
+            <名前付きslot>
+              slot="title" とすることで 子コンポーネント内の <slot name="title"></slot> の部分にレンダリングされるようになります 
+              slot="content" とすることで 子コンポーネント内の <slot name="content"></slot> の部分にレンダリングされるようになります 
+            -->
+          <h2 slot="title">{{ quoteTitle }}</h2>
+          <p slot="content">A wonderful Quote</p>
         </app-quote>
       </div>
     </div>
