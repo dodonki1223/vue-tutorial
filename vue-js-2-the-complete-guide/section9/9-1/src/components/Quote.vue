@@ -11,10 +11,18 @@
           </app-quote>
       -->
       <slot name="title"></slot>
+      <!--  
+        名前付きslot で親コンポーネントから渡されなかった場合は slot の中身が表示されるようになる
+        下記の場合は slot 内の The Subtitle が出力される
+        -->
+      <span style="color: #ccc"><slot name="subtitle">The Subtitle</slot></span>
     </div>
     <hr>
     <div>
-      <slot name="content"></slot>
+      <!-- 
+        名前のない slot はデフォルトslotになるため、指定の無い時はコイツにレンダリングされる
+        -->
+      <slot></slot>
     </div>
   </div>
 </template>
