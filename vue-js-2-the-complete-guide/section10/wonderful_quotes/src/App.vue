@@ -4,10 +4,11 @@
       newQuote($event)の($event)は省略できる
       Vue.js が暗黙的に解釈してくれるため
       -->
-    <app-new-quote
-      @quoteAdded="newQuote">
-    </app-new-quote>
+    <app-new-quote @quoteAdded="newQuote"></app-new-quote>
     <app-quote-grid :quotes="quotes"></app-quote-grid>
+    <div class="col-sm-12 text-center">
+      <div class="alert alert-info">Info: Click on a Quote to delete it!</div>
+    </div>
   </div>
 </template>
 
