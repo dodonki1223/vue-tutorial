@@ -21,6 +21,7 @@ export default {
   },
   methods: {
     createNew() {
+      this.$emit('newQuote', this.quote)
     }
   }
 }
