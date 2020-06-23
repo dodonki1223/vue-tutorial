@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { quoteBus } from './main.js'
 import QuoteGrid from './components/QuoteGrid.vue'
 import NewQuote from './components/NewQuote.vue'
 
@@ -33,7 +34,18 @@ export default {
   methods: {
     newQuote(quote) {
       this.quotes.push(quote)
+    },
+    deleteQuote(index) {
+      this.quotes.splice(index, 1)
     }
+  },
+  created() {
+    quoteBus.$on('quoteAdded', (quote) => {
+      this.newQuote(quote)
+    }),
+    quoteBus.$on('deletedQuote', (index) => {
+      this.deleteQuote(index)
+    })
   }
 }
 </script>

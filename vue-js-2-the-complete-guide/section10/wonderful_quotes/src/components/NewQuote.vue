@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import { quoteBus } from '../main.js'
+
 export default {
   data: function() {
     return {
@@ -21,7 +23,7 @@ export default {
   },
   methods: {
     createNew() {
-      this.$emit('quoteAdded', this.quote)
+      quoteBus.$emit('quoteAdded', this.quote)
       this.quote = ''
     }
   }
