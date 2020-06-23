@@ -21,7 +21,8 @@ export default {
   },
   methods: {
     createNew() {
-      this.$emit('newQuote', this.quote)
+      this.$emit('quoteAdded', this.quote)
+      this.quote = ''
     }
   }
 }

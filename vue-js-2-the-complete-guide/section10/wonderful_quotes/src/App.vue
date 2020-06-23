@@ -1,9 +1,13 @@
 <template>
   <div class="container">
-    <app-quote-grid :quotes="quotes"></app-quote-grid>
+    <!--  
+      newQuote($event)の($event)は省略できる
+      Vue.js が暗黙的に解釈してくれるため
+      -->
     <app-new-quote
-      @newQuote="newQuote($event)">
+      @quoteAdded="newQuote">
     </app-new-quote>
+    <app-quote-grid :quotes="quotes"></app-quote-grid>
   </div>
 </template>
 
