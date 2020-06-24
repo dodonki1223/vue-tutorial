@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     createNew() {
-      quoteBus.$emit('quoteAdded', this.quote)
+      this.$emit('quoteAdded', this.quote)
       this.quote = ''
     }
   }

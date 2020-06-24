@@ -3,6 +3,7 @@
     <app-quote
       v-for="(quote, index) in quotes" 
       :key="index"
+      @click.native="deleteQuote(index)"
       :quote-index="index">
       {{ quote }}
     </app-quote>
@@ -16,7 +17,12 @@ export default {
   components: {
     appQuote: Quote
   },
-  props: ['quotes']
+  props: ['quotes'],
+  methods: {
+    deleteQuote(index) {
+      this.$emit('quoteDeleted', index)
+    }
+  }
 }
 </script>
 
