@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <app-header></app-header>
+    <app-header 
+      :quoteCount="quotes.length"
+      :maxQoutes="maxQuotes">
+    </app-header>
     <!--  
       newQuote($event)の($event)は省略できる
       Vue.js が暗黙的に解釈してくれるため
@@ -35,6 +38,9 @@ export default {
   },
   methods: {
     newQuote(quote) {
+      if (this.quotes.length >= this.maxQuotes) {
+        return alert('Please delete Quotes first!')
+      }
       this.quotes.push(quote)
     },
     deleteQuote(index) {
