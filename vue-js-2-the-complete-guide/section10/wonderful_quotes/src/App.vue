@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <app-header></app-header>
     <!--  
       newQuote($event)の($event)は省略できる
       Vue.js が暗黙的に解釈してくれるため
@@ -13,12 +14,13 @@
 </template>
 
 <script>
-import { quoteBus } from './main.js'
+import Header    from './components/Header.vue'
 import QuoteGrid from './components/QuoteGrid.vue'
-import NewQuote from './components/NewQuote.vue'
+import NewQuote  from './components/NewQuote.vue'
 
 export default {
   components: {
+    appHeader: Header,
     appQuoteGrid: QuoteGrid,
     appNewQuote: NewQuote,
   },
