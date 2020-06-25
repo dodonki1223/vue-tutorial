@@ -15,11 +15,17 @@
           </div>
           <div class="form-group">
             <label for="password">Password</label>
+            <!-- 
+                v-model.lazy を使用することで input イベントではなく change イベント後（フォーカスが外れた時）に
+                同期するようになります
+                https://jp.vuejs.org/v2/guide/forms.html#%E4%BF%AE%E9%A3%BE%E5%AD%90
+              -->
             <input
               type="password"
               id="password"
               class="form-control"
-              v-model="userData.password">
+              v-model.lazy="userData.password">
+            <p>{{ userData.password }}</p>
           </div>
           <div class="form-group">
             <label for="age">Age</label>
