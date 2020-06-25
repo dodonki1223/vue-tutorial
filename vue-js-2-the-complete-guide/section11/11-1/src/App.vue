@@ -41,11 +41,16 @@
       <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 form-group">
           <label for="message">Message</label><br>
-          <!-- Interpolation between <textarea>{{ test }}</textarea> doesn't work!-->
+          <!-- 
+            Interpolation between <textarea>{{ test }}</textarea> doesn't work!
+            textarea のデータを表示する時は value="hogehoge" って感じにするため <textarea>{{ test }}</textarea>
+            は正しく動作しないので注意
+            -->
           <textarea
             id="message"
             rows="5"
-            class="form-control"></textarea>
+            class="form-control"
+            v-model="message"></textarea>
         </div>
       </div>
       <div class="row">
@@ -113,7 +118,11 @@
             <p>Mail: {{ userData.email }}</p>
             <p>Password: {{ userData.password }}</p>
             <p>Age: {{ userData.age }}</p>
-            <p>Message: </p>
+            <!-- 
+              message は実際には改行文字を保持しているが表示する部分では改行されないで表示される
+              もし改行も表現した場合は `style="white-space: pre"` を使用することで改行も表示されるようになる
+              -->
+            <p style="white-space: pre">Message: {{ message }}</p>
             <p><strong>Send Mail?</strong></p>
             <ul>
               <li></li>
@@ -137,6 +146,7 @@ export default {
         password: '',
         age: 27,
       },
+      message: "A new text"
     }
   }
 }
