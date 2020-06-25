@@ -55,19 +55,25 @@
       </div>
       <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+          <!--  
+              ２つの入力を同じモデルにバインドしVue.jsがこれを検出する
+              同じモデルでここに２つのチェックボックスがあり、自動的にマージされる
+            -->
           <div class="form-group">
             <label for="sendmail">
               <input
                 type="checkbox"
                 id="sendmail"
-                value="SendMail"> Send Mail
+                value="SendMail"
+                v-model="sendMail"> Send Mail
             </label>
             <label for="sendInfomail">
               <input
                 type="checkbox"
                 id="sendInfomail"
-                value="SendInfoMail"> Send Infomail
-            </label>
+                value="SendInfoMail"
+                v-model="sendMail"> Send Infomail
+            </label> 
           </div>
 
         </div>
@@ -125,7 +131,7 @@
             <p style="white-space: pre">Message: {{ message }}</p>
             <p><strong>Send Mail?</strong></p>
             <ul>
-              <li></li>
+              <li v-for="item in sendMail" :key="item">{{ item }}</li>
             </ul>
             <p>Gender:</p>
             <p>Priority:</p>
@@ -146,7 +152,8 @@ export default {
         password: '',
         age: 27,
       },
-      message: "A new text"
+      message: "A new text",
+      sendMail: []
     }
   }
 }
