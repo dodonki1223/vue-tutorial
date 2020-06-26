@@ -104,10 +104,36 @@
       <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 from-group">
           <label for="priority">Priority</label>
+          <!--  
+              select Box のデフォルト値を設定する方法として以下の２つがある
+              ただし以下の２つで行っていた場合はselecteのやり方で上書きされてしまうので注意
+                select で行う
+                  <select v-model="selectedPriority">
+                    <option>ABCEDFG</option>
+                    <option>あいうえお</option>
+                  </select>
+                option で行う
+                  <select>
+                    <option :selected="true">ABCEDFG</option>
+                    <option>あいうえお</option>
+                  </select>
+            -->
           <select
             id="priority"
-            class="form-control">
-            <option></option>
+            class="form-control"
+            v-model="selectedPriority">
+            <!-- 
+                :selected には true or false を設定する必要がある
+                普通だと選択されているものに true が設定されるので同じようにすること
+                下記のような感じで設定すること
+                  <option 
+                    v-for="priority in priorities" 
+                    :key="priority" 
+                    :selected="priority == 'Medium'">{{ priority }}</option>
+              -->
+            <option 
+              v-for="priority in priorities" 
+              :key="priority">{{ priority }}</option>
           </select>
         </div>
       </div>
@@ -141,7 +167,7 @@
               <li v-for="item in sendMail" :key="item">{{ item }}</li>
             </ul>
             <p>Gender: {{ gender }}</p>
-            <p>Priority:</p>
+            <p>Priority: {{ selectedPriority }}</p>
             <p>Switched:</p>
           </div>
         </div>
@@ -161,7 +187,9 @@ export default {
       },
       message: "A new text",
       sendMail: [],
-      gender: 'Male'
+      gender: 'Male',
+      selectedPriority: 'High',
+      priorities: ['High', 'Medium', 'Low']
     }
   }
 }
