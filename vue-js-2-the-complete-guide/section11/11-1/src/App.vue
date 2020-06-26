@@ -7,11 +7,24 @@
           <hr>
           <div class="form-group">
             <label for="email">Mail</label>
+            <!-- 
+              下記で行っていること（:value、@input）は v-model="userData.email" と同じです
+              v-model="" は裏で下記のように動いています
+              `value` という `props` が必要で `@input` という イベントが必要だとわかります
+              ※v-model.lazy の場合は `@changed` というイベントになります
+                <input
+                  type="text"
+                  id="email"
+                  class="form-control"
+                  :value="userData.email"
+                  @input="userData.email = $event.target.value">
+             -->
             <input
               type="text"
               id="email"
               class="form-control"
-              v-model="userData.email">
+              :value="userData.email"
+              @input="userData.email = $event.target.value">
           </div>
           <div class="form-group">
             <label for="password">Password</label>
