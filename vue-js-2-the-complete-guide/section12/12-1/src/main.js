@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+// グローバルディレクティブ
 Vue.directive('highlight', {
   bind(el, binding, vnode) {
     // el.style.backgroundColor = 'green'

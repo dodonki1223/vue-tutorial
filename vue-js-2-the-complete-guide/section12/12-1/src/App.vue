@@ -26,8 +26,9 @@
               などのように指定すること
               カスタムディレクティブでは binding.modifiers でモディファイ配列を取得することができる
           -->
-        <p v-highlight:background.delayed="'red'">Color thing</p>
-        <p v-highlight="'green'">Color thing</p>
+        <p v-highlight:background.delayed="'red'">Color this</p>
+        <p v-highlight="'green'">Color this</p>
+        <p v-local-highlight:background.delayed="'red'">Color this, too</p>
       </div>
     </div>
   </div>
@@ -35,6 +36,22 @@
 
 <script>
 export default {
+  // ローカルディレクティブ
+  directives: {
+    'local-highlight': {
+      bind(el, binding, vnode) {
+        let delay = 0
+        if (binding.modifiers['delayed']) delay = 3000;
+        setTimeout(() => {
+          if (binding.arg == 'background') {
+            el.style.backgroundColor = binding.value
+          } else {
+            el.style.color = binding.value
+          }
+        }, delay)
+      }
+    }
+  }
 }
 </script>
 
