@@ -152,6 +152,12 @@
       </div>
       <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+          <!--
+              下記記事が参考になる
+                https://jp.vuejs.org/v2/guide/components.html#%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88%E3%81%A7-v-model-%E3%82%92%E4%BD%BF%E3%81%86
+                https://qiita.com/romukey/items/ebd447f769cd9ad1352c 
+              コンポーネントに v-model を設定しコンポーネントで input を emit すれば双方向データバインディングされるようになる
+            -->
           <app-switch v-model="dataSwitch"></app-switch>
         </div>
       </div>
