@@ -17,9 +17,12 @@
         <!-- 
             中の値は文字列にする必要があるため、シングルクォーテーションで囲むこと 
             ここで渡す値はすべて binding の値になります
+            v-highlight:background="'red'"
+              :background が引数扱いになりますなのでカスタムディレクティブ側では
+              binding.arg を使用して引数を取得することが出来ます
           -->
-        <p v-highlight="'red'">Color thing</p>
-        
+        <p v-highlight:background="'red'">Color thing</p>
+        <p v-highlight="'green'">Color thing</p>
       </div>
     </div>
   </div>
