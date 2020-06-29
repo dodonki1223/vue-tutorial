@@ -20,8 +20,13 @@
             v-highlight:background="'red'"
               :background が引数扱いになりますなのでカスタムディレクティブ側では
               binding.arg を使用して引数を取得することが出来ます
+            モディファイの指定は以下の通りにすること
+              v-highlight:background.delayed="'red'"（delayedモディファイを追加している）
+              複数のモディファイを使用する場合は v-highlight:background.delayed.another="'red'"
+              などのように指定すること
+              カスタムディレクティブでは binding.modifiers でモディファイ配列を取得することができる
           -->
-        <p v-highlight:background="'red'">Color thing</p>
+        <p v-highlight:background.delayed="'red'">Color thing</p>
         <p v-highlight="'green'">Color thing</p>
       </div>
     </div>
