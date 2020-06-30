@@ -28,7 +28,7 @@
           -->
         <p v-highlight:background.delayed="'red'">Color this</p>
         <p v-highlight="'green'">Color this</p>
-        <p v-local-highlight:background.delayed.blink="'red'">Color this, too</p>
+        <p v-local-highlight:background.delayed.blink="{mainColor: 'red', secondColor: 'green', delay: 500}">Color this, too</p>
       </div>
     </div>
   </div>
@@ -43,8 +43,8 @@ export default {
         let delay = 0
         if (binding.modifiers['delayed']) delay = 3000;
         if (binding.modifiers['blink']) {
-          let mainColor    = binding.value
-          let secondColor  = 'blue'
+          let mainColor    = binding.value.mainColor
+          let secondColor  = binding.value.secondColor
           let currentColor = mainColor
           setTimeout(() => {
             setInterval(() => {
@@ -54,14 +54,14 @@ export default {
               } else {
                 el.style.color = currentColor
               }
-            }, 1000)
+            }, binding.value.delay)
           }, delay)
         } else {
           setTimeout(() => {
             if (binding.arg == 'background') {
-              el.style.backgroundColor = binding.value
+              el.style.backgroundColor = binding.value.mainColor
             } else {
-              el.style.color = binding.value
+              el.style.color = binding.value.mainColor
             }
           }, delay)
         }
