@@ -28,7 +28,7 @@
           -->
         <p v-highlight:background.delayed="'red'">Color this</p>
         <p v-highlight="'green'">Color this</p>
-        <p v-local-highlight:background.delayed="'red'">Color this, too</p>
+        <p v-local-highlight:background.delayed.blink="'red'">Color this, too</p>
       </div>
     </div>
   </div>
@@ -42,13 +42,29 @@ export default {
       bind(el, binding, vnode) {
         let delay = 0
         if (binding.modifiers['delayed']) delay = 3000;
-        setTimeout(() => {
-          if (binding.arg == 'background') {
-            el.style.backgroundColor = binding.value
-          } else {
-            el.style.color = binding.value
-          }
-        }, delay)
+        if (binding.modifiers['blink']) {
+          let mainColor    = binding.value
+          let secondColor  = 'blue'
+          let currentColor = mainColor
+          setTimeout(() => {
+            setInterval(() => {
+              currentColor == secondColor ? currentColor = mainColor : currentColor = secondColor
+              if (binding.arg == 'background') {
+                el.style.backgroundColor = currentColor
+              } else {
+                el.style.color = currentColor
+              }
+            }, 1000)
+          }, delay)
+        } else {
+          setTimeout(() => {
+            if (binding.arg == 'background') {
+              el.style.backgroundColor = binding.value
+            } else {
+              el.style.color = binding.value
+            }
+          }, delay)
+        }
       }
     }
   }
