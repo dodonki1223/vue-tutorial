@@ -10,7 +10,6 @@
             下記のやり方が filters のチェーンの仕方でもあります
           -->
         <p>{{ text | toUppercase | to-lowercase }}</p>
-        <hr>
         <!--  
             filters の代替手段は computed を使用すること
             v-for のようなものに filters を使用するとパフォーマンスが悪すぎるのでおすすめしない
@@ -19,12 +18,16 @@
         <ul>
           <li v-for="(fruit, index) in filteredFruits" :key="index">{{ fruit }}</li>
         </ul>
+        <hr>
+        <app-list></app-list>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import List from './List.vue'
+
 export default {
   data() {
     return {
@@ -49,6 +52,9 @@ export default {
         return element.match(this.filterText)
       })
     }
+  },
+  components: {
+    appList: List
   }
 }
 </script>
