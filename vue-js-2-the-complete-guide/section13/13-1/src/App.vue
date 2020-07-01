@@ -8,8 +8,17 @@
             toUppercase（ローカル）ですべて大文字に変換し to-lowercase（グローバル）で
             すべて小文字に変換します
             下記のやり方が filters のチェーンの仕方でもあります
-         -->
+          -->
         <p>{{ text | toUppercase | to-lowercase }}</p>
+        <hr>
+        <!--  
+            filters の代替手段は computed を使用すること
+            v-for のようなものに filters を使用するとパフォーマンスが悪すぎるのでおすすめしない
+          -->
+        <input v-model="filterText">
+        <ul>
+          <li v-for="(fruit, index) in filteredFruits" :key="index">{{ fruit }}</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -19,7 +28,9 @@
 export default {
   data() {
     return {
-      text: 'Hello there!'
+      text: 'Hello there!',
+      fruits: ['Apple', 'Banana', 'Mango', 'Melon'],
+      filterText: ''
     }
   },
   /*
@@ -30,6 +41,13 @@ export default {
   filters: {
     toUppercase(value) {
       return value.toUpperCase()
+    }
+  },
+  computed: {
+    filteredFruits() {
+      return this.fruits.filter((element) => {
+        return element.match(this.filterText)
+      })
     }
   }
 }
