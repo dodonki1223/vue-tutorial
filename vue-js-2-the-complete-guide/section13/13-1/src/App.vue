@@ -32,6 +32,8 @@ import { fruitMixin } from './fruitMixin'
 export default {
   /*
       data と mixin の値が被っても Vue.js 側でちゃんとマージしてくれる
+      実行される順序が必ず先に Mixin が実行され最後に Component が実行されるためである
+      Mixin が破壊的に壊されることがない理由です
    */
   mixins: [fruitMixin],
   data() {
