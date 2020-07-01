@@ -27,8 +27,13 @@
 
 <script>
 import List from './List.vue'
+import { fruitMixin } from './fruitMixin'
 
 export default {
+  /*
+      data と mixin の値が被っても Vue.js 側でちゃんとマージしてくれる
+   */
+  mixins: [fruitMixin],
   data() {
     return {
       text: 'Hello there!',
