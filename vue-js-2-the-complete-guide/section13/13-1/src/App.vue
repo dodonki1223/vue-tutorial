@@ -11,6 +11,12 @@
           -->
         <p>{{ text | toUppercase | to-lowercase }}</p>
         <!--  
+            Mixin で使用している fruits に値を追加するとすべての Mixin で値が追加されるわけではない
+            コピーされるため、対象の Mixin にだけデータが追加される
+            Button をクリックすると挙動を確認することができます
+          -->
+        <button @click="fruits.push('Berries')">Add New Item</button>
+        <!--  
             filters の代替手段は computed を使用すること
             v-for のようなものに filters を使用するとパフォーマンスが悪すぎるのでおすすめしない
           -->
