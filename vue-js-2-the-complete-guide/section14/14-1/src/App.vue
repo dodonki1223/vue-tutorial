@@ -11,7 +11,7 @@
             transition は１つの要素のみにしか適用できない
             ２つの div を含ませると console にエラーが吐かれます
           -->
-        <transition>
+        <transition name="fade">
           <div class="alert alert-info" v-if="show">This is some Info</div>
         </transition>
       </div>
@@ -30,5 +30,25 @@ export default {
 </script>
 
 <style>
+/*  
+    transition タグの name 属性と prefix が一致する
+    それぞれの enter, enter-active, leave, leave-active などの
+    イベントを自動で感知してくれる
+ */
+.fade-enter {
+  /* opacity のデフォルトは 1 です */
+  opacity: 0;
+}
 
+.fade-enter-active {
+  transition: opacity 1s;
+}
+
+.fade-leave {
+}
+
+.fade-leave-active {
+  transition: opacity 1s;
+  opacity: 0;
+}
 </style>
