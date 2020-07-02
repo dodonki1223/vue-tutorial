@@ -4,6 +4,17 @@
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <h1>Animations</h1>
         <hr>
+        <!--  
+            動的なアニメーションを実行するために selectbox で選択したもので
+            アニメーションされるようにする
+            :name, :type を使用すれば動的に名前と属性を設定してアニメーションを実行することができる
+          -->
+        <select v-model="alertAnimation" class="form-control">
+          <option value="fade">Fade</option>
+          <option value="slide">Slide</option>
+        </select>
+        <br>
+        <br>
         <button class="btn btn-primary" @click="show = !show">Show Alert</button>
         <br>
         <br>
@@ -13,7 +24,7 @@
             CSSトランジションプロパティを使用した方法
               v-if,v-show どちらでもアニメーションを使用することができる
           -->
-        <transition name="fade">
+        <transition :name="alertAnimation">
           <div class="alert alert-info" v-show="show">This is some Info</div>
         </transition>
         <!--  
@@ -46,7 +57,8 @@
 export default {
   data() {
     return {
-      show: true
+      show: true,
+      alertAnimation: 'fade'
     }
   }
 }
