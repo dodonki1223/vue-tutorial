@@ -11,9 +11,10 @@
             transition は１つの要素のみにしか適用できない
             ２つの div を含ませると console にエラーが吐かれます
             CSSトランジションプロパティを使用した方法
+              v-if,v-show どちらでもアニメーションを使用することができる
           -->
         <transition name="fade">
-          <div class="alert alert-info" v-if="show">This is some Info</div>
+          <div class="alert alert-info" v-show="show">This is some Info</div>
         </transition>
         <!--  
             CSSアニメーションプロパティを使用した方法
