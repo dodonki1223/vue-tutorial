@@ -27,8 +27,14 @@
         </transition>
         <!--  
             appear 属性を追加することでページの初回ロード時にアニメーションが実行されるようになる
+            異なるCSSクラス名を使用した場合は以下のように設定することができます
+              animated.css のクラスを使用しています
+              詳しい使い方についてはこちら:https://github.com/animate-css/animate.css/blob/9254c0d535e71df6cbd9aabfc7173a26802c48b5/docsSource/sections/01-usage.md
           -->
-        <transition name="fade" appear>
+        <transition 
+          appear
+          enter-active-class="animate__animated animate__bounce"
+          leave-active-class="animate__animated animate__shakeY">
           <div class="alert alert-info" v-show="show">This is some Info</div>
         </transition>
       </div>
