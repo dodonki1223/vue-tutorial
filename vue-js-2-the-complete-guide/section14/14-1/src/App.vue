@@ -48,6 +48,21 @@
           leave-active-class="animate__animated animate__shakeY">
           <div class="alert alert-info" v-show="show">This is some Info</div>
         </transition>
+        <!--  
+            v-if、v-else を使用しないと正しく表示されない(v-if、v-else は最終的に１つの要素を表示するためです)
+              v-show は display:none するだけなので要素が消えないため
+            key の指定をすること
+              同じタグ名を持つ要素同士でトグルする時、key属性を指定することで、個別の要素であることをVueに伝えなければいけない
+              Vue のコンパイラは効率化のために要素の内容だけを置き換えようとするため
+            mode="out-in"
+              詳しくはここを：https://jp.vuejs.org/v2/guide/transitions.html#%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B8%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%89
+              「最初に現在の要素がトランジションアウトして、それが完了したら、新しい要素がトランジションインする」
+              div それぞれで実行されてしまうため１つ目の div が終わった後、２つ目の div が実行されるため、変な空きができてしまうのを防ぐやり方
+          -->
+        <transition :name="alertAnimation" mode="out-in">
+          <div class="alert alert-info" v-if="show" key="info">This is some Info</div>
+          <div class="alert alert-warning" v-else key="warning">This is some Warning</div>
+        </transition>
       </div>
     </div>
   </div>
@@ -105,7 +120,7 @@ export default {
 
 .slide-leave-active {
   animation: slide-out 1s ease-out forwards;
-  transition: opacity 3s;
+  transition: opacity 1s;
   opacity: 0;
 }
 
