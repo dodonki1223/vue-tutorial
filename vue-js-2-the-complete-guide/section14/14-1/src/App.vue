@@ -63,6 +63,27 @@
           <div class="alert alert-info" v-if="show" key="info">This is some Info</div>
           <div class="alert alert-warning" v-else key="warning">This is some Warning</div>
         </transition>
+        <hr>
+        <button class="btn btn-primary" @click="load = !load">Load / Remove Element</button>
+        <br>
+        <br>
+        <!--  
+            JavaScriptでフックする方法です
+              CSS以外の方法だと以下のようにイベントをフックしてアニメーションを追加することができる
+              詳しくはここを：https://jp.vuejs.org/v2/guide/transitions.html#JavaScript-%E3%83%95%E3%83%83%E3%82%AF
+          -->
+        <transition
+          @before-enter="beforeEnter"
+          @enter="enter"
+          @after-enter="afterEnter"
+          @enter-cancelled="enterCancelled"
+
+          @before-leave="beforeLeave"
+          @leave="leave"
+          @after-leave="afterLeave"
+          @leave-cancelled="leaveCancelled">
+          <div style="width: 100px; height: 100px; background-color: lightgreen" v-if="load"></div>
+        </transition>
       </div>
     </div>
   </div>
@@ -72,8 +93,37 @@
 export default {
   data() {
     return {
-      show: true,
+      show: false,
+      load: true,
       alertAnimation: 'fade'
+    }
+  },
+  methods: {
+    beforeEnter(el) {
+      console.log('beforeEnter')
+    },
+    enter(el, done) {
+      console.log('enter')
+      done()
+    },
+    afterEnter(el) {
+      console.log('afterEnter')
+    },
+    enterCancelled(el) {
+      console.log('enterCancelled')
+    },
+    beforeLeave(el) {
+      console.log('beforeLeave')
+    },
+    leave(el, done) {
+      console.log('leave')
+      done()
+    },
+    afterLeave(el) {
+      console.log('afterLeave')
+    },
+    leaveCancelled(el) {
+      console.log('leaveCancelled')
     }
   }
 }
