@@ -18,18 +18,26 @@
 </template>
 
 <script>
+import config from './const'
+
 export default {
   data() {
     return {
       user: {
         username: '',
         email: ''
-      }
+      },
+      firebaseConfig: config.FIREBASE
     }
   },
   methods: {
     submit() {
-      console.log(this.user)
+      this.$http.post(`${this.firebaseConfig.URL}data.json`, this.user)
+        .then(response => {
+          console.log(response)
+        }, error => {
+          console.log(error)
+        })
     }
   }
 }
