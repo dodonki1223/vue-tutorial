@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     submit() {
-      this.$http.post(`${this.firebaseConfig.URL}data.json`, this.user)
+      this.$http.post('', this.user)
         .then(response => {
           console.log(response)
         }, error => {
@@ -48,7 +48,7 @@ export default {
         })
     },
     fetchData() {
-      this.$http.get(`${this.firebaseConfig.URL}data.json`)
+      this.$http.get('')
         .then(response => {
           // Promise を返すので return する（非同期なため）
           return response.json()

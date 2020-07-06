@@ -8,6 +8,11 @@ import App from './App.vue'
  */
 Vue.use(VueResource)
 
+/*
+    URLなどのグローバルの設定をここで宣言することができる
+ */
+Vue.http.options.root = 'https://example.com/data.json'
+
 new Vue({
   el: '#app',
   render: h => h(App)
