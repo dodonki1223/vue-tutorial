@@ -18,13 +18,18 @@ Vue.http.options.root = 'https://example.com/data.json'
     firebase は PUT にすることでデータの書き換えを行う、POSTの場合は新規に作成する
       POST:新しいリソースを作成する
       PUT :既存のものを更新する（一意の識別子が必要なため、新しいリソースを作ったときにあったよくわからないKeyを使う）
+    next() を使用して受信処理をグローバルで代行することができます
+      まずはじめにnext()が実行され、次にApp.vue の fetchData が実行されるようだ
  */
 Vue.http.interceptors.push((request, next) => {
   console.log(request)
   if (request.method == 'POST') {
     request.method = 'PUT'
   }
-  next()
+  next(response => {
+    console.log('next')
+    response.json = () => { return { message: response.body } }
+  })
 })
 
 new Vue({
