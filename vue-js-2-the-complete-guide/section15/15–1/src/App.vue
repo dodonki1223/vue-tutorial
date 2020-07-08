@@ -13,6 +13,14 @@
         </div>
         <button class="btn btn-primary" @click="submit">Submit</button>
         <hr>
+
+
+        <input type="text" class="form-control" v-model="node">
+        <br>
+        <br>
+
+
+
         <button class="btn btn-primary" @click="fetchData">Get Data</button>
         <br>
         <br>
@@ -36,6 +44,7 @@ export default {
       },
       users: [],
       resource: {},
+      node: 'data',
       firebaseConfig: config.FIREBASE
     }
   },
@@ -53,7 +62,22 @@ export default {
       this.resource.saveAlt(this.user)
     },
     fetchData() {
-      this.$http.get('data.json')
+      // this.$http.get('data.json')
+      //   .then(response => {
+      //     // Promise を返すので return する（非同期なため）
+      //     return response.json()
+      //   })
+      //   .then(data => {
+      //     const resultArray = []
+      //     for (let key in data) {
+      //       resultArray.push(data[key])
+      //     }
+      //     this.users = resultArray
+      //   })
+
+      // 引数に「{node: this.node}」を指定することで下記の部分の node が this.node に置き換わります
+      // this.resource = this.$resource('{node}.json', {}, customActions)
+      this.resource.getData({node: this.node})
         .then(response => {
           // Promise を返すので return する（非同期なため）
           return response.json()
@@ -71,9 +95,12 @@ export default {
     // ここで宣言することで複数のリソースを簡単に作成することができる
     // 必要な POST や GET を宣言しておくことでここに集中管理でコードを記述できるようになる
     const customActions = {
-      saveAlt: {method: 'POST' , url: 'alternative.json'}
+      saveAlt: {method: 'POST' , url: 'alternative.json'},
+      getData: {method: 'GET'}
     }
-    this.resource = this.$resource('data.json', {}, customActions)
+    // URL Template を使用しているので設定方法は以下の記事を参考にすること 
+    // https://medialize.github.io/URI.js/uri-template.html
+    this.resource = this.$resource('{node}.json', {}, customActions)
   }
 }
 </script>
