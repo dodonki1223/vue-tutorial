@@ -11,7 +11,7 @@ Vue.use(VueResource)
 /*
     URLなどのグローバルの設定をここで宣言することができる
  */
-Vue.http.options.root = 'https://example.com/data.json'
+Vue.http.options.root = 'https://example.com/'
 
 /*
     interceptors(横取りって意味) を使用することでリクエストのフックを行うことができます
