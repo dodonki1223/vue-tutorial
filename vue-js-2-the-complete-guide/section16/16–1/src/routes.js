@@ -17,5 +17,7 @@ export const routes = [
     { path: '', component: UserStart },
     { path: ':id', component: UserDetail },
     { path: ':id/edit', component: UserEdit, name: 'userEdit' },
-  ] }
+  ] },
+  // redirect キーを使用することでリダイレクトさせることができる
+  { path: '/redirect-me', redirect: { name: 'home' } }
 ]
