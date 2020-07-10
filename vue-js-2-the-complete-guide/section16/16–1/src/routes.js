@@ -19,5 +19,7 @@ export const routes = [
     { path: ':id/edit', component: UserEdit, name: 'userEdit' },
   ] },
   // redirect キーを使用することでリダイレクトさせることができる
-  { path: '/redirect-me', redirect: { name: 'home' } }
+  { path: '/redirect-me', redirect: { name: 'home' } },
+  // ワイルドカードを使用して一致しないところの場合は特定のURLにリダイレクトさせる
+  { path: '*', redirect: '/' }
 ]
