@@ -5,7 +5,6 @@ import { routes } from './routes'
 
 Vue.use(VueRouter)
 
-
 /*
   下記書き方は以下の省略の書き方です
     const router = new VueRouter({
@@ -23,7 +22,22 @@ Vue.use(VueRouter)
  */ 
 const router = new VueRouter({
   routes,
-  mode: 'history'
+  mode: 'history',
+  /*
+    詳しくはこちらの解説ページを
+      https://router.vuejs.org/ja/guide/advanced/scroll-behavior.html#%E3%82%B9%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%AB%E3%81%AE%E6%8C%AF%E3%82%8B%E8%88%9E%E3%81%84
+   */
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    }
+    // URLに フラグメント識別子がある場合はスクロールする
+    if (to.hash) {
+      return { selector: to.hash }
+    }
+    // ここに値を指定すると遷移した時、スクロールした状態で表示される
+    return { x: 0, y: 0 }
+  }
 })
 
 new Vue({

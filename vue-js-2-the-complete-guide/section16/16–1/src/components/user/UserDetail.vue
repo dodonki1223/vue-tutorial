@@ -31,6 +31,7 @@ export default {
         /* 
             URLにフラグメント識別子ありで渡すことができる
               ただフラングメント識別子をただ渡すだけではスクロールされない
+              もしスクロールさせたい場合は VueRouter の設定で scrollBehavior を使用すること
          */
         hash: '#data'
       }
