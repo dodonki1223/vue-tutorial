@@ -36,6 +36,23 @@ export default {
         hash: '#data'
       }
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    /* beforeRouteEnter ライフサイクルフックではVueインスタンスにアクセスできないため
+       下記コードはエラーになる（このコンポーネントがまだ作成されていないため）
+         this.link
+       もしアクセスしたい場合は以下のようにする必要があります
+       next(vm => {
+        vm.link
+       })
+    */
+
+    // ここでユーザーが認証されているかどうか判定するのは簡単にできる
+    if (true) {
+      next()
+    } else {
+      next(false)
+    }
   }
 }
 </script>

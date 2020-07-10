@@ -40,6 +40,17 @@ const router = new VueRouter({
   }
 })
 
+/*
+    ページに遷移する前に実行されます（グローバルで使用したい場合はここを使う）
+      全部の遷移処理で実行されるので気をつけて下さい
+      next() でページ遷移処理が実行されます
+      next(false) にすることでページの遷移を止めることができます
+ */
+router.beforeEach((to, from, next) => {
+  console.log('global beforeEach')
+  next()
+})
+
 new Vue({
   el: '#app',
   router,

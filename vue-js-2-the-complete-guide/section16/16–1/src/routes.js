@@ -15,7 +15,14 @@ export const routes = [
     'header-bottom': Header
   }, children: [
     { path: '', component: UserStart },
-    { path: ':id', component: UserDetail },
+    /*
+        特定のパスごとにページ遷移前になにか実行したい時は beforeEnter を使用する
+          beforeEach（グローバルで実行する奴） と使い方は基本的に一緒
+     */
+    { path: ':id', component: UserDetail, beforeEnter: (to, from, next) => {
+      console.log('inside route setup')
+      next()
+    } },
     { path: ':id/edit', component: UserEdit, name: 'userEdit' },
   ] },
   // redirect キーを使用することでリダイレクトさせることができる
