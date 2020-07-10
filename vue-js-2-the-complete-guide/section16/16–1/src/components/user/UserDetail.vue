@@ -10,7 +10,7 @@
       -->
     <router-link 
       tag="button" 
-      :to="{ name: 'userEdit', params: { id: $route.params.id } }"
+      :to="{ name: 'userEdit', params: { id: $route.params.id }, query: { locale: 'en', q: 105 } }"
       class="btn btn-primary">Edit User</router-link>
   </div>
 </template>
