@@ -17,6 +17,9 @@
        },
     watch を使用して id が変わるようにします
       $route の値が変わるたび変更するようにします
+    vue-router 2.2 以降だと props でルートパラメータを抽出することができるようになったので公式のサンプル
+    を参考にすると違うやり方ができます
+      https://github.com/vuejs/vue-router/tree/dev/examples/route-props
  */
 export default {
   data() {
