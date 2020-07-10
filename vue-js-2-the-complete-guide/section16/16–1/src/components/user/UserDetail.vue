@@ -10,7 +10,31 @@
       -->
     <router-link 
       tag="button" 
-      :to="{ name: 'userEdit', params: { id: $route.params.id }, query: { locale: 'en', q: 105 } }"
+      :to="link"
       class="btn btn-primary">Edit User</router-link>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      link: { 
+        name: 'userEdit', 
+        params: { 
+          id: this.$route.params.id 
+        }, 
+        query: { 
+          locale: 'en', 
+          q: 105 
+        },
+        /* 
+            URLにフラグメント識別子ありで渡すことができる
+              ただフラングメント識別子をただ渡すだけではスクロールされない
+         */
+        hash: '#data'
+      }
+    }
+  }
+}
+</script>
