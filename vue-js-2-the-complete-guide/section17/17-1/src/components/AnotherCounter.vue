@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import { mapMutations } from 'vuex';
+    import { mapActions } from 'vuex';
     export default {
         /*
             <別解>
@@ -21,7 +21,7 @@
             このようにするのは Getters と同じようなやり方です！
          */
         methods: {
-            ...mapMutations([
+            ...mapActions([
                 'increment',
                 'decrement'
             ])
