@@ -12,6 +12,7 @@
 
 <script>
     import { mapGetters } from 'vuex';
+    import * as types from '../store/types';
     export default {
         /*
           mapGetters を使用した方がスッキリすると思う！
@@ -32,12 +33,17 @@
             'stringCounter'
           ])
          */
+        // computed: {
+        //   ...mapGetters([
+        //     'doubleCounter',
+        //     'stringCounter'
+        //   ])
+        // }
         computed: {
-          ...mapGetters([
-            'doubleCounter',
-            'stringCounter'
-          ])
+          ...mapGetters({
+            doubleCounter: types.DOUBLE_COUNTER,
+            stringCounter: types.CLICK_COUNTER
+          })
         }
-
     }
 </script>
