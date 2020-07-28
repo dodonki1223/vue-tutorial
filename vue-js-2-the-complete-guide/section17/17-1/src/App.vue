@@ -8,6 +8,14 @@
                 <hr>
                 <app-counter></app-counter>
                 <app-another-counter></app-another-counter>
+                <hr>
+                <!--
+                    双方向データバインディングを使用する方法①
+                    <input type="text" :value="value" @input="updateValue">
+                -->
+                <!-- 双方向データバインディングを使用する方法② -->
+                <input type="text" v-model="value">
+                <p>{{ value }}</p>
             </div>
         </div>
     </div>
@@ -20,6 +28,32 @@
     import AnotherResult from './components/AnotherResult.vue';
 
     export default {
+        computed: {
+            /*
+                双方向データバインディングを使用する方法①
+                value() {
+                    return this.$store.getters.value;
+                }
+             */
+            /*
+                双方向データバインディングを使用する方法②
+                    set() メソッドは値が設定されるたびに変更されるので常に再計算が走る
+                    computed とはとなりそう……。これはかなり例外的な書き方になる
+             */
+            value: {
+                get() {
+                    return this.$store.getters.value;
+                },
+                set() {
+                    this.$store.dispatch('updateValue', event.target.value);
+                }
+            }
+        },
+        methods: {
+            updateValue(event) {
+                this.$store.dispatch('updateValue', event.target.value);
+            }
+        },
         components: {
             appCounter: Counter,
             appAnotherCounter: AnotherCounter,
